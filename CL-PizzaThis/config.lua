@@ -55,6 +55,7 @@ Config.Hunger = {
     MacNCheese = 15,
     BBQPorkMac = 15,
     PastaFresca = 15,
+    Bjoenholdt = 20,
 }
 
 --Vehicles, you can add as many as you like.

@@ -205,6 +205,11 @@ QBCore.Functions.CreateUseableItem("pfresca", function(source, item)
     TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pfresca", 'Pasta Fresca', 5000, Config.Hunger["PastaFresca"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
+QBCore.Functions.CreateUseableItem("bjoenholdt", function(source, item)
+    local src = source
+    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Annanas Pizza', 5000, Config.Hunger["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+end)
+
 QBCore.Functions.CreateUseableItem("pmargharitaslice", function(source, item)
     local src = source
     TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pmargharitaslice", 'Pizza Margharita', 5000, Config.Hunger["PizzaMargharita"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
@@ -524,6 +529,22 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaFrescaItems', function
     local tomatoes = Player.Functions.GetItemByName("ptomatoes")
     local seafoodmix = Player.Functions.GetItemByName("pseafoodmix")
     if pasta ~= nil and oil ~= nil and tomatoes ~= nil and seafoodmix ~= nil then
+        cb(true)
+    else
+        cb(false)
+	end
+end)
+
+QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBjoenholdtPizzaItems', function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local tomatoes = Player.Functions.GetItemByName("ptomatoes")
+    local cheese = Player.Functions.GetItemByName("pvegicheese")
+    local basil = Player.Functions.GetItemByName("pbasil")
+    local pizzabase = Player.Functions.GetItemByName("ppizzabase")
+    local salt = Player.Functions.GetItemByName("psalt")
+    local annanas = Player.Functions.GetItemByName("pannanas")
+    if tomatoes ~= nil and cheese ~= nil and basil ~= nil and pizzabase ~= nil and salt ~= nil and annanas ~= nil then
         cb(true)
     else
         cb(false)

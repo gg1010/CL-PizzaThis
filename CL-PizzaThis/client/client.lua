@@ -1811,6 +1811,28 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				}
 			}
 			CookPizzaMenu[#CookPizzaMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979373569358319616/pvegpizza.png width=30px> ".." ┇ Cook Bjørnholdt Annanas Pizza",
+				txt = "Ingredients: <br> - Pizza Base <br> - Tomatoes <br> - Vegetarian Cheese <br> - Basil <br> - Salt <br> - Annanas",
+				params = {
+					event = "CL-Pizzeria:Make",
+					args = {
+						eventname = "Bjoenholdt",
+						number = 1,
+						time = 8000,
+						item2 = "ptomatoes",
+						item3 = "pvegicheese",
+						item4 = "pbasil",
+						item5 = "ppizzabase",
+						item6 = "psalt",
+						item6 = "annanas",
+						itemname = "Bjørnholdt Pizza",
+						recieveitem = "bjoenholdtpizza",
+						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
+						anim = "base_lazycook",
+					}            
+				}
+			}
+			CookPizzaMenu[#CookPizzaMenu+1] = {
 				header = Config.Locals["Menus"]["Pizzas"]["CloseMenuHeader"],
 				params = {
 					event = "qb-menu:client:closemenu",
