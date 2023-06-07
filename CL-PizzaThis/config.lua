@@ -1246,5 +1246,13 @@ Config.PizzaExtrasItems = {
             type = "item",
             slot = 4,
         },
+        [5] = {
+            name = "ananas",
+            price = 10,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 5,
+        },
     }   
 }

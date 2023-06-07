@@ -207,7 +207,7 @@ end)
 
 QBCore.Functions.CreateUseableItem("bjoenholdt", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Annanas Pizza', 5000, Config.Hunger["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Ananas Pizza', 5000, Config.Hunger["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pmargharitaslice", function(source, item)
@@ -543,8 +543,8 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBjoenholdtPizzaItems', func
     local basil = Player.Functions.GetItemByName("pbasil")
     local pizzabase = Player.Functions.GetItemByName("ppizzabase")
     local salt = Player.Functions.GetItemByName("psalt")
-    local annanas = Player.Functions.GetItemByName("pannanas")
-    if tomatoes ~= nil and cheese ~= nil and basil ~= nil and pizzabase ~= nil and salt ~= nil and annanas ~= nil then
+    local ananas = Player.Functions.GetItemByName("ananas")
+    if tomatoes ~= nil and cheese ~= nil and basil ~= nil and pizzabase ~= nil and salt ~= nil and ananas ~= nil then
         cb(true)
     else
         cb(false)
