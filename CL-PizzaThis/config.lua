@@ -56,6 +56,7 @@ Config.Hunger = {
     BBQPorkMac = 15,
     PastaFresca = 15,
     Bjoenholdt = 20,
+    carbonara = 15,
 }
 
 --Vehicles, you can add as many as you like.
@@ -1206,6 +1207,14 @@ Config.FoodFridgeItems = {
             info = {},
             type = "item",
             slot = 14,
+        },
+        [15] = {
+            name = "bacon",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 15,
         },
     }   
 }

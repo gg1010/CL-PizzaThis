@@ -205,6 +205,11 @@ QBCore.Functions.CreateUseableItem("pfresca", function(source, item)
     TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pfresca", 'Pasta Fresca', 5000, Config.Hunger["PastaFresca"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
+QBCore.Functions.CreateUseableItem("carbonara", function(source, item)
+    local src = source
+    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "carbonara", 'Pasta Carbonara', 5000, Config.Hunger["carbonara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+end)
+
 QBCore.Functions.CreateUseableItem("bjoenholdt", function(source, item)
     local src = source
     TriggerClientEvent("CL-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Ananas Pizza', 5000, Config.Hunger["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
@@ -535,7 +540,22 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaFrescaItems', function
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBjoenholdtPizzaItems', function(source, cb)
+QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForCarbonaraItems', function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local pasta = Player.Functions.GetItemByName("pregularpasta")
+    local oil = Player.Functions.GetItemByName("poliveoil")
+    local tomatoes = Player.Functions.GetItemByName("ptomatoes")
+    local parmesancheese = Player.Functions.GetItemByName("pparmesancheese")
+    local bacon = Player.Functions.GetItemByName("bacon")
+    if pasta ~= nil and oil ~= nil and tomatoes ~= nil and parmesancheese ~= nil then
+        cb(true)
+    else
+        cb(false)
+	end
+end)
+
+QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBjoenholdtItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local tomatoes = Player.Functions.GetItemByName("ptomatoes")

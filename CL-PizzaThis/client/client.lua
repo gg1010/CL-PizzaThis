@@ -1748,7 +1748,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				}
 			}
 			CookPizzaMenu[#CookPizzaMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979344270425198612/pmushroomspizza.png width=30px> ".." ┇ Cook Pungi Pizza",
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979344270425198612/pmushroomspizza.png width=30px> ".." ┇ Cook Fungi Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Butter <br> - Mozzarella <br> - Olive Oil <br> - Mushrooms",
 				params = {
 					event = "CL-Pizzeria:Make",
@@ -1911,6 +1911,27 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 						item5 = "pseafoodmix",
 						itemname = "Pasta Fresca",
 						recieveitem = "pfresca",
+						animdict = "anim@amb@business@meth@meth_monitoring_cooking@cooking@",
+						anim = "chemical_pour_long_cooker",
+					}            
+				}
+			}
+			PastasMenu[#PastasMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979439685174710392/pfresca.png width=30px> ".." ┇ Cook Pasta Carbonara",
+				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomatoes <br> - Parmesan Cheese <br> - Bacon",
+				params = {
+					event = "CL-Pizzeria:Make",
+					args = {
+						eventname = "Carbonara",
+						number = 1,
+						time = 8000,
+						item2 = "pregularpasta",
+						item3 = "poliveoil",
+						item4 = "ptomatoes",
+						item5 = "pparmesancheese",
+						item6 = "bacon",
+						itemname = "Pasta Carbonara",
+						recieveitem = "carbonara",
 						animdict = "anim@amb@business@meth@meth_monitoring_cooking@cooking@",
 						anim = "chemical_pour_long_cooker",
 					}            

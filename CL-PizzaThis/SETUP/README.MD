@@ -92,6 +92,8 @@ go to "qb-core" then shared folder > items.lua and add this :
 	['pvegpizzaslice'] 	 		 	 = {['name'] = 'pvegpizzaslice',				['label'] = 'Vegi Slice',		['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'ppizzaslice.png',	['unique'] = false, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Vegi Slice'},
 	['ananas'] 	 		 	 = {['name'] = 'ananas',					['label'] = 'Ananas Topping',		['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'ananas.png',	['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Topping til Ananas Pizza'},
     ['bjoenholdt']                    = {['name'] = 'bjoenholdt',                    ['label'] = 'Bjørnholdt Ananas Pizza',['weight'] = 500,         ['type'] = 'item',         ['image'] = 'pvegicheese.png',    ['unique'] = false,         ['useable'] = false,     ['shouldClose'] = true,       ['combinable'] = nil,   ['description'] = 'Bjørnholdts egen pizza med Ananas.'},
+	['carbonara'] 	 		 	 = {['name'] = 'carbonara',					['label'] = 'Pasta Carbonara',	['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'pregularpasta.png',['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Carbonara Pasta'},
+	['bacon'] 	 		 	 = {['name'] = 'bacon',					['label'] = 'Bacon',		['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'bacon.png',	['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Bacon'},
 
 2 - Add the job:
 go to "qb-core" then shared folder > jobs.lua and at least under line 4 :
