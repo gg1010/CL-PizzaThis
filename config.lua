@@ -6,7 +6,7 @@ Config.UseBlips = true -- Set to false to disable blips
 
 Config.MaxInventoryWeight = 120000 -- Set that to your max inventory weight, by defualt 120000
 
-Config.PolyZone = false -- Set to true to activate polygon zones
+Config.PolyZone = true -- Set to true to activate polygon zones
 
 Config.ConsumablesVersion = "new" -- Not sure if its got updated buut i noticed that QBCore:Server:SetMetaData isnt working anymore, If you still want to use this event change it to : "old"
 
@@ -275,6 +275,13 @@ Config.Locations = {
         Coords = vector3(813.95566, -752.9314, 27.080839),
         Heading = 270.20068,
         minZ = 26.780839,
+        maxZ = 27.780839,
+    },
+
+    Dessert = {
+        Coords = vector3(809.3, -761.3, 26.57),
+        Heading = 270.32,
+        minZ = 25.780839,
         maxZ = 27.780839,
     },
 
@@ -824,6 +831,11 @@ Config.Locals = {
             MainHeader = "Pizzas",
             CloseMenuHeader = "⬅ Close Menu",
         },
+
+        Dessert = {
+            MainHeader = "Dessert",
+            CloseMenuHeader = "⬅ Close Menu",
+        },
     },
 
     Notifications = {
@@ -997,6 +1009,11 @@ Config.Locals = {
         PizzaOven = { 
             Icon = "fa fa-fire",
             Label = "Cook Pizza",
+        },
+
+        Dessert = { 
+            Icon = "fa fa-pie",
+            Label = "Make Dessert",
         },
 
         PizzaAddons = { 
@@ -1223,6 +1240,54 @@ Config.FoodFridgeItems = {
             info = {},
             type = "item",
             slot = 15,
+        },
+        [16] = {
+            name = "vanilje",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 16,
+        },
+        [17] = {
+            name = "floede",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 17,
+        },
+        [18] = {
+            name = "sukker",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 18,
+        },
+        [19] = {
+            name = "mascarpone",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 19,
+        },
+        [20] = {
+            name = "savoiardi",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 20,
+        },
+        [21] = {
+            name = "chokolade",
+            price = 4,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 21,
         },
     }   
 }

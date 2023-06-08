@@ -1028,6 +1028,25 @@ Citizen.CreateThread(function()
 		distance = 1.2,
 	})
 
+	exports[Config.Target]:AddBoxZone("Dessert", vector3(Config.Locations["Dessert"]["Coords"].x, Config.Locations["Dessert"]["Coords"].y, Config.Locations["Dessert"]["Coords"].z), 0.6, 1.7, {
+		name = "Dessert",
+		heading = Config.Locations["Dessert"]["Heading"],
+		debugPoly = Config.PolyZone,
+		minZ = Config.Locations["Dessert"]["minZ"],
+		maxZ = Config.Locations["Dessert"]["maxZ"],
+	}, {
+		options = { 
+			{
+				type = "client",
+				event = "CL-Pizzeria:MakeDessertMenu",
+				icon = Config.Locals['Targets']['Dessert']['Icon'],
+				label = Config.Locals['Targets']['Dessert']['Label'],
+				job = Config.Job,
+			},
+		},
+		distance = 1.2,
+	})
+
 	exports[Config.Target]:AddBoxZone("PizzaAddons", vector3(Config.Locations["PizzaAddons"]["Coords"].x, Config.Locations["PizzaAddons"]["Coords"].y, Config.Locations["PizzaAddons"]["Coords"].z), 0.6, 0.9, {
 		name = "PizzaAddons",
 		heading = Config.Locations["PizzaAddons"]["Heading"],
@@ -1839,6 +1858,69 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				}
 			}
 			exports['qb-menu']:openMenu(CookPizzaMenu)
+		else
+            QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
+        end
+    end)
+end)
+
+RegisterNetEvent("CL-Pizzeria:MakeDessertMenu", function()
+	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+        if result then
+			local MakeDessertMenu = {
+				{
+					header = Config.Locals["Menus"]["Dessert"]["MainHeader"],
+					isMenuHeader = true,
+				}
+			}
+			MakeDessertMenu[#MakeDessertMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979152201584881704/pmargharita.png width=30px> ".." ┇ Cook Margharita Pizza",
+				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Olive Oil <br> - Salt",
+				params = {
+					event = "CL-Pizzeria:Make",
+					args = {
+						eventname = "MargharitaPizza",
+						number = 1,
+						time = 8000,
+						item2 = "pbasil",
+						item3 = "pmozzarella",
+						item4 = "poil",	
+						item5 = "psalt",
+						item6 = "ppizzabase",
+						itemname = "Margharita Pizza",
+						recieveitem = "pmargharita",
+						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
+						anim = "base_lazycook",
+					}            
+				}
+			}
+			MakeDessertMenu[#MakeDessertMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979340823177093140/pnapollitano.png width=30px> ".." ┇ Cook Napollitano Pizza",
+				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Salt",
+				params = {
+					event = "CL-Pizzeria:Make",
+					args = {
+						eventname = "NapollitanoPizza",
+						number = 1,
+						time = 8000,
+						item2 = "pbasil",
+						item3 = "pmozzarella",
+						item4 = "psalt",
+						item5 = "ppizzabase",
+						itemname = "Napollitano Pizza",
+						recieveitem = "pnapollitano",
+						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
+						anim = "base_lazycook",
+					}            
+				}
+			}
+			MakeDessertMenu[#MakeDessertMenu+1] = {
+				header = Config.Locals["Menus"]["Dessert"]["CloseMenuHeader"],
+				params = {
+					event = "qb-menu:client:closemenu",
+				}
+			}
+			exports['qb-menu']:openMenu(MakeDessertMenu)
 		else
             QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
         end
