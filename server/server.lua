@@ -210,6 +210,16 @@ QBCore.Functions.CreateUseableItem("carbonara", function(source, item)
     TriggerClientEvent("CL-Pizzeria:Eat", src, false, "carbonara", 'Pasta Carbonara', 5000, Config.Hunger["carbonara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
+QBCore.Functions.CreateUseableItem("marinara", function(source, item)
+    local src = source
+    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "marinara", 'Pasta Marinara', 5000, Config.Hunger["marinara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+end)
+
+QBCore.Functions.CreateUseableItem("pomodoro", function(source, item)
+    local src = source
+    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pomodoro", 'Pasta Al Pomodoro', 5000, Config.Hunger["pomodoro"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+end)
+
 QBCore.Functions.CreateUseableItem("bjoenholdt", function(source, item)
     local src = source
     TriggerClientEvent("CL-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Ananas Pizza', 5000, Config.Hunger["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
@@ -540,7 +550,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaFrescaItems', function
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForCarbonaraItems', function(source, cb)
+QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaCarbonaraItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local pasta = Player.Functions.GetItemByName("pregularpasta")
@@ -548,7 +558,35 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForCarbonaraItems', function(s
     local tomatoes = Player.Functions.GetItemByName("ptomatoes")
     local parmesancheese = Player.Functions.GetItemByName("pparmesancheese")
     local bacon = Player.Functions.GetItemByName("bacon")
-    if pasta ~= nil and oil ~= nil and tomatoes ~= nil and parmesancheese ~= nil then
+    if pasta ~= nil and oil ~= nil and tomatoes ~= nil and parmesancheese ~= nil and bacon ~= nill then
+        cb(true)
+    else
+        cb(false)
+	end
+end)
+
+QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaMarinaraItems', function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local pasta = Player.Functions.GetItemByName("pregularpasta")
+    local oil = Player.Functions.GetItemByName("poliveoil")
+    local tomatoes = Player.Functions.GetItemByName("ptomatoes")
+    if pasta ~= nil and oil ~= nil and tomatoes ~= nil then
+        cb(true)
+    else
+        cb(false)
+	end
+end)
+
+QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaPomodoroItems', function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local pasta = Player.Functions.GetItemByName("pregularpasta")
+    local oil = Player.Functions.GetItemByName("poliveoil")
+    local tomatoes = Player.Functions.GetItemByName("ptomatoes")
+    local ptomatosouce = Player.Functions.GetItemByName("ptomatosouce")
+    local pbasil = Player.Functions.GetItemByName("pbasil")
+    if pasta ~= nil and oil ~= nil and tomatoes ~= nill and ptomatosouce ~= nil and pbasil ~= nil then
         cb(true)
     else
         cb(false)

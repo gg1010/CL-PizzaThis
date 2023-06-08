@@ -1826,7 +1826,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 						item6 = "psalt",
 						item6 = "ananas",
 						itemname = "Bjørnholdt Pizza",
-						recieveitem = "bjoenholdtpizza",
+						recieveitem = "bjoenholdt",
 						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
 						anim = "base_lazycook",
 					}            
@@ -1906,7 +1906,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 						number = 1,
 						time = 8000,
 						item2 = "pregularpasta",
-						item3 = "poliveoil",
+						item3 = "poil",
 						item4 = "ptomatoes",
 						item5 = "pseafoodmix",
 						itemname = "Pasta Fresca",
@@ -1917,21 +1917,61 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				}
 			}
 			PastasMenu[#PastasMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979439685174710392/pfresca.png width=30px> ".." ┇ Cook Pasta Carbonara",
+				header = "<img src=https://cdn.discordapp.com/attachments/1108467372551061665/1116054682905874503/pcarbonara.png width=30px> ".." ┇ Cook Pasta Carbonara",
 				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomatoes <br> - Parmesan Cheese <br> - Bacon",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "CL-Pizzeria:Make", 
 					args = {
-						eventname = "Carbonara",
+						eventname = "PastaCarbonara",
 						number = 1,
 						time = 8000,
 						item2 = "pregularpasta",
-						item3 = "poliveoil",
+						item3 = "poil",
 						item4 = "ptomatoes",
 						item5 = "pparmesancheese",
 						item6 = "bacon",
 						itemname = "Pasta Carbonara",
 						recieveitem = "carbonara",
+						animdict = "anim@amb@business@meth@meth_monitoring_cooking@cooking@",
+						anim = "chemical_pour_long_cooker",
+					}            
+				}
+			}
+			PastasMenu[#PastasMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/1108467372551061665/1116053994398285854/marinara.png width=30px> ".." ┇ Cook Pasta Marinara",
+				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomato Souce",
+				params = {
+					event = "CL-Pizzeria:Make",
+					args = {
+						eventname = "PastaMarinara",
+						number = 1,
+						time = 8000,
+						item2 = "pregularpasta",
+						item3 = "poil",
+						item4 = "ptomatosouce",
+						itemname = "Pasta Marinara",
+						recieveitem = "marinara",
+						animdict = "anim@amb@business@meth@meth_monitoring_cooking@cooking@",
+						anim = "chemical_pour_long_cooker",
+					}            
+				}
+			}
+			PastasMenu[#PastasMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/1108467372551061665/1116054740938260670/pomodoro.png width=30px> ".." ┇ Cook Pasta Al Pomodoro",
+				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomatoes <br> - Tomato sauce <br> - Basil",
+				params = {
+					event = "CL-Pizzeria:Make",
+					args = {
+						eventname = "PastaPomodoro",
+						number = 1,
+						time = 8000,
+						item2 = "pregularpasta",
+						item3 = "poil",
+						item4 = "ptomatoes",
+						item5 = "ptomatosouce",
+						item6 = "pbasil",
+						itemname = "Pasta Al Pomodoro",
+						recieveitem = "pomodoro",
 						animdict = "anim@amb@business@meth@meth_monitoring_cooking@cooking@",
 						anim = "chemical_pour_long_cooker",
 					}            

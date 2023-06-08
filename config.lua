@@ -57,6 +57,14 @@ Config.Hunger = {
     PastaFresca = 15,
     Bjoenholdt = 20,
     carbonara = 15,
+    marinara = 15,
+    pomodoro = 15,
+    bruscettaa = 20,
+    vegburger = 10,
+    fishburger = 15,
+    pannacotta = 15,
+    tiramisu = 18,
+    profitroles = 14,
 }
 
 --Vehicles, you can add as many as you like.
