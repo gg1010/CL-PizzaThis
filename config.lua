@@ -1,22 +1,20 @@
 Config = Config or {}
 
-Config.Job = 'pizzeria' -- Name for the job that can access the target etc 
+Config.Arbejde = 'pizzeria' 
 
-Config.UseBlips = true -- Set to false to disable blips
+Config.BrugBlips = true 
 
-Config.MaxInventoryWeight = 120000 -- Set that to your max inventory weight, by defualt 120000
+Config.MaxInventoryVegt = 120000 
 
-Config.PolyZone = true -- Set to true to activate polygon zones
+Config.PolyZone = true 
 
-Config.ConsumablesVersion = "new" -- Not sure if its got updated buut i noticed that QBCore:Server:SetMetaData isnt working anymore, If you still want to use this event change it to : "old"
+Config.Target = 'qb-target' 
 
-Config.Target = 'qb-target' -- Name for the target
+Config.HaandvaskStress = 3.0 
 
-Config.WashingHandsStress = 3.0 -- How much stress is decreased when washing hands
+Config.MarkerLengde = 5.0 
 
-Config.MarkerDistance = 5.0 -- How much distance from the marker will the player be able to interact with the garage? more = more MS less = less MS
-
-Config.Thirst = {
+Config.Toerst = {
     Champagne = 10,
     Beer = 3,
     RedWine = 5,
@@ -43,7 +41,7 @@ Config.Thirst = {
     Sprite = 7,
 }
 
-Config.Hunger = {
+Config.Mad = {
     Banana = 6,
     Apple = 4,
     Orange = 5,
@@ -67,34 +65,230 @@ Config.Hunger = {
     profitroles = 14,
 }
 
---Vehicles, you can add as many as you like.
-Config.Vehicles = {
+Config.Koertoerjer = {
     [1] = {
-        ['vehiclename'] = "Baller", -- Name
-        ['vehicle'] = "baller", -- Model To Spawn
-        ['price'] = 5500, -- Price
+        ['vehiclename'] = "Baller", 
+        ['vehicle'] = "baller", 
+        ['price'] = 5500, 
     }, 
     [2] = {
-        ['vehiclename'] = "Pony", -- Name
-        ['vehicle'] = "pony", -- Model To Spawn
-        ['price'] = 2500, -- Price
+        ['vehiclename'] = "Pony", 
+        ['vehicle'] = "pony", 
+        ['price'] = 2500, 
     }, 
 }
 
 Config.DutyObjects = {
     [1] = {
-        ['model'] = "p_amb_clipboard_01", -- Model To Spawn
+        ['model'] = "p_amb_clipboard_01", 
         ['coords'] = vector3(812.42199, -755.81111, 27.274909),
         ['heading'] = 180.11533,
     }, 
     [2] = {
-        ['model'] = "prop_cd_paper_pile1", -- Model To Spawn
+        ['model'] = "prop_cd_paper_pile1", 
         ['coords'] = vector3(812.12199, -755.81111, 27.164909),
         ['heading'] = 180.11533,
     }, 
 }
 
-Config.Locations = {
+Config.Ting = {
+    Glasses = {
+        [1] = {
+            ['glass'] = 'pwineglass',
+            ['glassname'] = 'Wine Glass',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977942404617367602/pwineglass.png width=30px>",
+            ['price'] = 50,
+        }, 
+        [2] = {
+            ['glass'] = 'pwhiskyglass',
+            ['glassname'] = 'Whisky Glass',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977942404038541332/pwhiskyglass.png width=30px>",
+            ['price'] = 20,
+        }, 
+        [3] = {
+            ['glass'] = 'pbeermug',
+            ['glassname'] = 'Beer Mug',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977942405015822337/pbeermug.png  width=30px>",
+            ['price'] = 15,
+        }, 
+    },
+
+    Drinks = {
+        [1] = {
+            ['drink'] = 'predwine',
+            ['drinkname'] = 'Red Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949563329597460/rwine.png width=30px>",
+            ['glass'] = "pwineglass",
+            ['glassname'] = "Wine Glass",
+        }, 
+        [2] = {
+            ['drink'] = 'pwhitewine',
+            ['drinkname'] = 'White Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977948183462289428/rwhitewineglass.png width=30px>",
+            ['glass'] = "pwineglass",
+            ['glassname'] = "Wine Glass",
+        }, 
+        [3] = {
+            ['drink'] = 'ppinkwine',
+            ['drinkname'] = 'Pink Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949691209715832/ppinkwine.png width=30px>",
+            ['glass'] = "pwineglass",
+            ['glassname'] = "Wine Glass",
+        }, 
+        [4] = {
+            ['drink'] = 'pwhiskey',
+            ['drinkname'] = 'Whiskey',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949497831342180/pwhiskey.png width=30px>",
+            ['glass'] = "pwhiskyglass",
+            ['glassname'] = "Whiskey Glass",
+        }, 
+        [5] = {
+            ['drink'] = 'pbeermugfull',
+            ['drinkname'] = 'Beer',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949864992333864/pbeermugfull.png width=30px>",
+            ['glass'] = "pbeermug",
+            ['glassname'] = "Beer Mug",
+        }, 
+    },
+
+    GrabDrinks = {
+        [1] = {
+            ['drink'] = 'pdusche',
+            ['drinkname'] = 'Dusche Beer',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977997686479396944/pdusche.png width=30px>",
+        }, 
+        [2] = {
+            ['drink'] = 'plogger',
+            ['drinkname'] = 'Logger Beer',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977995386541187082/np_logger-beer.png width=30px>",
+        }, 
+        [3] = {
+            ['drink'] = 'pam',
+            ['drinkname'] = 'AM Beer',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977997657953939536/pam.png width=30px>",
+        }, 
+    },
+
+    GrabBossDrinks = {
+        [1] = {
+            ['drink'] = 'pgoldsake',
+            ['drinkname'] = 'Gold Sake',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353371079655424/pgoldsake.png width=30px>",
+        }, 
+        [2] = {
+            ['drink'] = 'prum',
+            ['drinkname'] = 'Rum',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353421121900554/prum.png width=30px>",
+        }, 
+        [3] = {
+            ['drink'] = 'pwhitewinebottle',
+            ['drinkname'] = 'White Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353392923603044/pwhitewinebottle.png width=30px>",
+        }, 
+        [4] = {
+            ['drink'] = 'pwhiskeybottle',
+            ['drinkname'] = 'Whiskey Bottle',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353398594281562/pwhiskeybottle.png width=30px>",
+        }, 
+        [5] = {
+            ['drink'] = 'pchampagne',
+            ['drinkname'] = 'Champagne Bottle',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353337370030131/pchampagne.png width=30px>",
+        }, 
+    },
+
+    Fruits = {
+        [1] = {
+            ['fruit'] = 'porange',
+            ['fruitname'] = 'Orange',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978366440908390430/borange.png width=30px>",
+        }, 
+        [2] = {
+            ['fruit'] = 'papple',
+            ['fruitname'] = 'Apple',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978366441214591007/bapple.png width=30px>",
+        }, 
+        [3] = {
+            ['fruit'] = 'pbanana',
+            ['fruitname'] = 'Banana',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978366440484786226/bbanana.png width=30px>",
+        }, 
+    },
+
+    WineRack = {
+        [1] = {
+            ['wine'] = 'psparklingwine',
+            ['winename'] = 'Sparkling Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978765597699633162/psparklingwine.png width=30px>",
+        }, 
+        [2] = {
+            ['wine'] = 'predwinebottle',
+            ['winename'] = 'Regular Red Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978765717883220038/np_red-wine-bottle.png width=30px>",
+        }, 
+        [3] = {
+            ['wine'] = 'pcastellobrolio',
+            ['winename'] = 'Castello Brolio Red Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978767806915026994/pcastellobrolio.png width=30px>",
+        }, 
+        [4] = {
+            ['wine'] = 'pgaryfarrel',
+            ['winename'] = 'Gary Reffel Red Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978767807166689290/pgaryfarrel.png width=30px>",
+        }, 
+        [5] = {
+            ['wine'] = 'prutherfordhill',
+            ['winename'] = 'Rutherford Hill Red Wine',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978767807430950912/prutherfordhill.png width=30px>",
+        }, 
+        [6] = {
+            ['wine'] = 'ppinkwinebottle',
+            ['winename'] = 'Pink Wine Bottle',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978772887819407450/ppinkwinebottle.png width=30px>",
+        }, 
+    },
+
+    CoffeeCups = {
+        [1] = {
+            ['glass'] = 'phighcoffeeglasscup',
+            ['glassname'] = 'High Coffee Glass',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963851739767930890/bhighcoffeeglasscup.png width=30px>",
+            ['price'] = 50,
+        }, 
+        [2] = {
+            ['glass'] = 'pcoffeeglass',
+            ['glassname'] = 'Coffee Glass',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963851731794526218/bcoffeeglass.png width=30px>",
+            ['price'] = 20,
+        }, 
+        [3] = {
+            ['glass'] = 'pespressocoffeecup',
+            ['glassname'] = 'Espresso Coffee Cup',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963851746076131378/bexpressocoffeecup.png  width=30px>",
+            ['price'] = 15,
+        }, 
+    },
+
+    DrinksMaker = {
+        [1] = {
+            ['drink'] = 'psprite',
+            ['drinkname'] = 'Sprite',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979129312940797962/bsprite.png width=30px>",
+        }, 
+        [2] = {
+            ['drink'] = 'pcocacola',
+            ['drinkname'] = 'CocaCola',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979129313280548936/bcocacola.png width=30px>",
+        }, 
+        [3] = {
+            ['drink'] = 'ppepper',
+            ['drinkname'] = 'DR.Pepper',
+            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979129313557352468/bpepper.png  width=30px>",
+        }, 
+    },
+}
+
+Config.Sted = {
     General = {
         Blips = {
             [1] = {
@@ -537,203 +731,6 @@ Config.Locations = {
     },
 }
 
-Config.Items = {
-    Glasses = {
-        [1] = {
-            ['glass'] = 'pwineglass',
-            ['glassname'] = 'Wine Glass',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977942404617367602/pwineglass.png width=30px>",
-            ['price'] = 50,
-        }, 
-        [2] = {
-            ['glass'] = 'pwhiskyglass',
-            ['glassname'] = 'Whisky Glass',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977942404038541332/pwhiskyglass.png width=30px>",
-            ['price'] = 20,
-        }, 
-        [3] = {
-            ['glass'] = 'pbeermug',
-            ['glassname'] = 'Beer Mug',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977942405015822337/pbeermug.png  width=30px>",
-            ['price'] = 15,
-        }, 
-    },
-
-    Drinks = {
-        [1] = {
-            ['drink'] = 'predwine',
-            ['drinkname'] = 'Red Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949563329597460/rwine.png width=30px>",
-            ['glass'] = "pwineglass",
-            ['glassname'] = "Wine Glass",
-        }, 
-        [2] = {
-            ['drink'] = 'pwhitewine',
-            ['drinkname'] = 'White Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977948183462289428/rwhitewineglass.png width=30px>",
-            ['glass'] = "pwineglass",
-            ['glassname'] = "Wine Glass",
-        }, 
-        [3] = {
-            ['drink'] = 'ppinkwine',
-            ['drinkname'] = 'Pink Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949691209715832/ppinkwine.png width=30px>",
-            ['glass'] = "pwineglass",
-            ['glassname'] = "Wine Glass",
-        }, 
-        [4] = {
-            ['drink'] = 'pwhiskey',
-            ['drinkname'] = 'Whiskey',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949497831342180/pwhiskey.png width=30px>",
-            ['glass'] = "pwhiskyglass",
-            ['glassname'] = "Whiskey Glass",
-        }, 
-        [5] = {
-            ['drink'] = 'pbeermugfull',
-            ['drinkname'] = 'Beer',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977949864992333864/pbeermugfull.png width=30px>",
-            ['glass'] = "pbeermug",
-            ['glassname'] = "Beer Mug",
-        }, 
-    },
-
-    GrabDrinks = {
-        [1] = {
-            ['drink'] = 'pdusche',
-            ['drinkname'] = 'Dusche Beer',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977997686479396944/pdusche.png width=30px>",
-        }, 
-        [2] = {
-            ['drink'] = 'plogger',
-            ['drinkname'] = 'Logger Beer',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977995386541187082/np_logger-beer.png width=30px>",
-        }, 
-        [3] = {
-            ['drink'] = 'pam',
-            ['drinkname'] = 'AM Beer',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/977997657953939536/pam.png width=30px>",
-        }, 
-    },
-
-    GrabBossDrinks = {
-        [1] = {
-            ['drink'] = 'pgoldsake',
-            ['drinkname'] = 'Gold Sake',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353371079655424/pgoldsake.png width=30px>",
-        }, 
-        [2] = {
-            ['drink'] = 'prum',
-            ['drinkname'] = 'Rum',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353421121900554/prum.png width=30px>",
-        }, 
-        [3] = {
-            ['drink'] = 'pwhitewinebottle',
-            ['drinkname'] = 'White Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353392923603044/pwhitewinebottle.png width=30px>",
-        }, 
-        [4] = {
-            ['drink'] = 'pwhiskeybottle',
-            ['drinkname'] = 'Whiskey Bottle',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353398594281562/pwhiskeybottle.png width=30px>",
-        }, 
-        [5] = {
-            ['drink'] = 'pchampagne',
-            ['drinkname'] = 'Champagne Bottle',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978353337370030131/pchampagne.png width=30px>",
-        }, 
-    },
-
-    Fruits = {
-        [1] = {
-            ['fruit'] = 'porange',
-            ['fruitname'] = 'Orange',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978366440908390430/borange.png width=30px>",
-        }, 
-        [2] = {
-            ['fruit'] = 'papple',
-            ['fruitname'] = 'Apple',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978366441214591007/bapple.png width=30px>",
-        }, 
-        [3] = {
-            ['fruit'] = 'pbanana',
-            ['fruitname'] = 'Banana',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978366440484786226/bbanana.png width=30px>",
-        }, 
-    },
-
-    WineRack = {
-        [1] = {
-            ['wine'] = 'psparklingwine',
-            ['winename'] = 'Sparkling Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978765597699633162/psparklingwine.png width=30px>",
-        }, 
-        [2] = {
-            ['wine'] = 'predwinebottle',
-            ['winename'] = 'Regular Red Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978765717883220038/np_red-wine-bottle.png width=30px>",
-        }, 
-        [3] = {
-            ['wine'] = 'pcastellobrolio',
-            ['winename'] = 'Castello Brolio Red Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978767806915026994/pcastellobrolio.png width=30px>",
-        }, 
-        [4] = {
-            ['wine'] = 'pgaryfarrel',
-            ['winename'] = 'Gary Reffel Red Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978767807166689290/pgaryfarrel.png width=30px>",
-        }, 
-        [5] = {
-            ['wine'] = 'prutherfordhill',
-            ['winename'] = 'Rutherford Hill Red Wine',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978767807430950912/prutherfordhill.png width=30px>",
-        }, 
-        [6] = {
-            ['wine'] = 'ppinkwinebottle',
-            ['winename'] = 'Pink Wine Bottle',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978772887819407450/ppinkwinebottle.png width=30px>",
-        }, 
-    },
-
-    CoffeeCups = {
-        [1] = {
-            ['glass'] = 'phighcoffeeglasscup',
-            ['glassname'] = 'High Coffee Glass',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963851739767930890/bhighcoffeeglasscup.png width=30px>",
-            ['price'] = 50,
-        }, 
-        [2] = {
-            ['glass'] = 'pcoffeeglass',
-            ['glassname'] = 'Coffee Glass',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963851731794526218/bcoffeeglass.png width=30px>",
-            ['price'] = 20,
-        }, 
-        [3] = {
-            ['glass'] = 'pespressocoffeecup',
-            ['glassname'] = 'Espresso Coffee Cup',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963851746076131378/bexpressocoffeecup.png  width=30px>",
-            ['price'] = 15,
-        }, 
-    },
-
-    DrinksMaker = {
-        [1] = {
-            ['drink'] = 'psprite',
-            ['drinkname'] = 'Sprite',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979129312940797962/bsprite.png width=30px>",
-        }, 
-        [2] = {
-            ['drink'] = 'pcocacola',
-            ['drinkname'] = 'CocaCola',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979129313280548936/bcocacola.png width=30px>",
-        }, 
-        [3] = {
-            ['drink'] = 'ppepper',
-            ['drinkname'] = 'DR.Pepper',
-            ['image'] = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979129313557352468/bpepper.png  width=30px>",
-        }, 
-    },
-}
-
 Config.Locals = {
     Menus = {
         Garage = {
@@ -1023,101 +1020,7 @@ Config.Locals = {
     },
 }
 
-Config.ShopItems = {
-    label = "Shop",
-    slots = 5,
-    items = { 
-        [1] = {
-            name = "ppizzaflour",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 1,
-        },
-        [2] = {
-            name = "pwater",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 2,
-        },
-        [3] = {
-            name = "psalt",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 3,
-        },
-        [4] = {
-            name = "poil",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 4,
-        },
-        [5] = {
-            name = "pmenu",
-            price = 0,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 5,
-        },
-    }
-}
-
-Config.FridgeItems = {
-    label = "Workers Fridge",
-    slots = 5,
-    items = {
-        [1] = {
-            name = "water_bottle",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 1,
-        },
-        [2] = {
-            name = "kurkakola",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 2,
-        },
-        [3] = {
-            name = "grapejuice",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 3,
-        },
-        [4] = {
-            name = "twerks_candy",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 4,
-        },
-        [5] = {
-            name = "snikkel_candy",
-            price = 5,
-            amount = 100,
-            info = {},
-            type = "item",
-            slot = 5,
-        },
-    }   
-}
-
-Config.FoodFridgeItems = {
+Config.MadKoeleskabsTing = {
     label = "Food Fridge",
     slots = 5,
     items = {
@@ -1292,7 +1195,54 @@ Config.FoodFridgeItems = {
     }   
 }
 
-Config.PizzaExtrasItems = {
+Config.ButiksTing = {
+    label = "Shop",
+    slots = 5,
+    items = { 
+        [1] = {
+            name = "ppizzaflour",
+            price = 5,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 1,
+        },
+        [2] = {
+            name = "pwater",
+            price = 5,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 2,
+        },
+        [3] = {
+            name = "psalt",
+            price = 5,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 3,
+        },
+        [4] = {
+            name = "poil",
+            price = 5,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 4,
+        },
+        [5] = {
+            name = "pmenu",
+            price = 0,
+            amount = 100,
+            info = {},
+            type = "item",
+            slot = 5,
+        },
+    }
+}
+
+Config.PizzaEkstraTing = {
     label = "Pizza Extras",
     slots = 5,
     items = {

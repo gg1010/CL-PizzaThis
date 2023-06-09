@@ -8,10 +8,11 @@ body {
 .mainmenu-container {
     position: absolute;
     width: 897px;
-    height: 677px;
-    background: url(https://cdn.discordapp.com/attachments/967914093396774942/977900661242990592/unknown.png);
+    height: 847px;
+    background: url(https://cdn.discordapp.com/attachments/632893308422586388/1116854575928979506/pmenu.png);
     left: 50%;
     top: 50%;
+    margin-top: 10vh;
     display: none;
     transform: translate(-50%, -50%);
     border-style: solid;

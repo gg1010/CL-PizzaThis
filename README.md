@@ -1,10 +1,3 @@
-CL-PizzaThis
-
-Thank you for downloading the script please follow this steps before running the script:
-
-1 - Add items:
-go to "qb-core" then shared folder > items.lua and add this : 
-
 	--Pizzeria
 	['pmenu'] 	 			 		 = {['name'] = 'pmenu',							['label'] = 'Pizza This Menu',	['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'pmenu.png',		['unique'] = false, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pizza This Menu'},
 	['pwineglass'] 	 			 	 = {['name'] = 'pwineglass',					['label'] = 'Wine Glass',		['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'pwineglass.png',	['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Wine Glass'},
@@ -81,9 +74,13 @@ go to "qb-core" then shared folder > items.lua and add this :
 	['pmushroomspizzaslice'] 	 	 = {['name'] = 'pmushroomspizzaslice',			['label'] = 'Fungi slice',		['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'ppizzaslice.png',	['unique'] = false, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Fungi Slice'},
 	['pseafoodslice'] 	 		 	 = {['name'] = 'pseafoodslice',					['label'] = 'Seafood Slice',	['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'ppizzaslice.png',	['unique'] = false, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Seafood Slice'},
 	['pvegpizzaslice'] 	 		 	 = {['name'] = 'pvegpizzaslice',				['label'] = 'Vegi Slice',		['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'ppizzaslice.png',	['unique'] = false, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Vegi Slice'},
+	['ananas'] 	 		 			 = {['name'] = 'ananas',						['label'] = 'Ananas Topping',	['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'ananas.png',		['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Topping til Ananas Pizza'},
+    ['bjoenholdt']                   = {['name'] = 'bjoenholdt',                    ['label'] = 'Bjørnholdt Ananas Pizza',['weight'] = 500, ['type'] = 'item',      ['image'] = 'bjoernholdtp.png', ['unique'] = false,         ['useable'] = false,    ['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'Bjørnholdts egen pizza med Ananas.'},
+	['carbonara'] 	 		 		 = {['name'] = 'carbonara',						['label'] = 'Pasta Carbonara',	['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'pcarbonara.png',	['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pasta Carbonara'},
+	['bacon'] 	 		 			 = {['name'] = 'bacon',							['label'] = 'Bacon',			['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'bacon.png',		['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Bacon'},
+	['marinara'] 	 		 		 = {['name'] = 'marinara',						['label'] = 'Pasta Marinara',	['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'marinara.png',		['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pasta Marinara'},
+	['pomodoro'] 	 		 		 = {['name'] = 'pomodoro',						['label'] = 'Pasta Al Pomodoro',['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'pomodoro.png',		['unique'] = false, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pasta Al Pomodoro'},
 
-2 - Add the job:
-go to "qb-core" then shared folder > jobs.lua and at least under line 4 :
 
     ["pizzeria"] = {
         label = "Pizzeria",
@@ -105,8 +102,3 @@ go to "qb-core" then shared folder > jobs.lua and at least under line 4 :
             },
         }
     },
-
-3 - Add images to inventory
-here you have images folder copy the images inside that folder and put it inside "qb-inventory"
-
-Have more questions / issues ? feel free to open a ticket in our discord server : https://discord.gg/kGPECGG27Q

@@ -8,9 +8,7 @@ local dough = 0
 
 local ClipBoardSpawned = false
 
-----------------
-----Handlers
-----------------
+
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 	QBCore.Functions.GetPlayerData(function(PlayerData)
 		PlayerJob = PlayerData.job
@@ -25,55 +23,39 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
 end)
 
 AddEventHandler('onResourceStart', function(resource)
-    if GetCurrentResourceName() == resource then
+    if GetCurrentResourceName() == 'Gustav-PizzaThis' then
 		PlayerJob = QBCore.Functions.GetPlayerData().job
 		QBCore.Functions.GetPlayerData(function(PlayerData)
 			PlayerJob = PlayerData.job
 			if PlayerData.job.onduty then
-				if PlayerData.job.name == Config.Job then
+				if PlayerData.job.name == Config.Arbejde then
 					TriggerServerEvent("QBCore:ToggleDuty")
 				end
 			end
 		end)
-    end
+    else
+		print('Stop med at ændre navnet hvis det her bliver fjernet SÅ ER DET UUUUDDDD!!!')
+		StopResource()
+	end
 end)
 
-----------------
-----Blips
-----------------
-Citizen.CreateThread(function()
-	for k, v in pairs(Config.Locations['General']['Blips']) do
-		if Config.UseBlips then
-			Blip = AddBlipForCoord(v.Coords.x, v.Coords.y, v.Coords.z)
-			SetBlipSprite(Blip, v.BlipId)
-			SetBlipDisplay(Blip, 4)
-			SetBlipScale(Blip, 0.6)	
-			SetBlipColour(Blip, v.BlipColour)
-			SetBlipAsShortRange(Blip, true)
-			BeginTextCommandSetBlipName("STRING")
-			AddTextComponentString(v.Title)
-			EndTextCommandSetBlipName(Blip)
-		end
-	end	
-end)
 
-----------------
-----Garage Marker
-----------------
+
+
 CreateThread(function()
     while true do
         local plyPed = PlayerPedId()
         local plyCoords = GetEntityCoords(plyPed)
         local letSleep = true        
 
-        if PlayerJob.name == Config.Job then
-            if (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, Config.Locations["Garage"]["Marker"].x, Config.Locations["Garage"]["Marker"].y, Config.Locations["Garage"]["Marker"].z, true) < Config.MarkerDistance) then
+        if PlayerJob.name == Config.Arbejde then
+            if (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, Config.Sted["Garage"]["Marker"].x, Config.Sted["Garage"]["Marker"].y, Config.Sted["Garage"]["Marker"].z, true) < Config.MarkerLengde) then
                 letSleep = false
-                DrawMarker(36, Config.Locations["Garage"]["Marker"].x, Config.Locations["Garage"]["Marker"].y, Config.Locations["Garage"]["Marker"].z + 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.7, 0.7, 0.5, 0.5, 162, 33, 36, 255, true, false, false, true, false, false, false)
-                 if (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, Config.Locations["Garage"]["Marker"].x, Config.Locations["Garage"]["Marker"].y, Config.Locations["Garage"]["Marker"].z, true) < 1.5) then
-                    DrawText3D(Config.Locations["Garage"]["Marker"].x, Config.Locations["Garage"]["Marker"].y, Config.Locations["Garage"]["Marker"].z, "~g~E~w~ - Pizzeria Garage") 
+                DrawMarker(36, Config.Sted["Garage"]["Marker"].x, Config.Sted["Garage"]["Marker"].y, Config.Sted["Garage"]["Marker"].z + 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.7, 0.7, 0.5, 0.5, 162, 33, 36, 255, true, false, false, true, false, false, false)
+                 if (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, Config.Sted["Garage"]["Marker"].x, Config.Sted["Garage"]["Marker"].y, Config.Sted["Garage"]["Marker"].z, true) < 1.5) then
+                    DrawText3D(Config.Sted["Garage"]["Marker"].x, Config.Sted["Garage"]["Marker"].y, Config.Sted["Garage"]["Marker"].z, "~g~E~w~ - Pizzeria Garage") 
                     if IsControlJustReleased(0, 38) then
-                        TriggerEvent("CL-Pizzeria:Garage:Menu")
+                        TriggerEvent("Gustav-Pizzeria:Garage:Menu")
                     end
                 end  
             end
@@ -87,10 +69,8 @@ CreateThread(function()
     end
 end)
 
-----------------
-----Events
-----------------
-RegisterNetEvent('CL-Pizzeria:StoreVehicle', function()
+
+RegisterNetEvent('Gustav-Pizzeria:StoreVehicle', function()
     local ped = PlayerPedId()
     local car = GetVehiclePedIsIn(PlayerPedId(), true)
     if IsPedInAnyVehicle(ped, false) then
@@ -104,7 +84,7 @@ RegisterNetEvent('CL-Pizzeria:StoreVehicle', function()
     end
 end)
 
-RegisterNetEvent("CL-Pizzeria:SpawnVehicle", function(vehicle)
+RegisterNetEvent("Gustav-Pizzeria:SpawnVehicle", function(vehicle)
     local coords = vector4(809.81219, -732.6318, 27.597684, 133.52844)
     QBCore.Functions.SpawnVehicle(vehicle, function(veh)
         SetVehicleNumberPlateText(veh, "PIZZA"..tostring(math.random(1000, 9999)))
@@ -115,28 +95,28 @@ RegisterNetEvent("CL-Pizzeria:SpawnVehicle", function(vehicle)
     end, coords, true)
 end)
 
-RegisterNetEvent('CL-Pizzeria:OpenShop', function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent('Gustav-Pizzeria:OpenShop', function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 		if result then
-			TriggerServerEvent("inventory:server:OpenInventory", "shop", "Main Shop", Config.ShopItems)
+			TriggerServerEvent("inventory:server:OpenInventory", "shop", "Main Shop", Config.ButiksTing)
 		else
 			QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
 		end
 	end)
 end)
 
-RegisterNetEvent('CL-Pizzeria:OpenAddonsShop', function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent('Gustav-Pizzeria:OpenAddonsShop', function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 		if result then
-			TriggerServerEvent("inventory:server:OpenInventory", "shop", "Pizza Extras", Config.PizzaExtrasItems)
+			TriggerServerEvent("inventory:server:OpenInventory", "shop", "Pizza Extras", Config.PizzaEkstraTing)
 		else
 			QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
 		end
 	end)
 end)
 
-RegisterNetEvent('CL-Pizzeria:WashHands', function(data)
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent('Gustav-Pizzeria:WashHands', function(data)
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 		if result then
 			SetEntityHeading(PlayerPedId(), data.heading)
 			QBCore.Functions.Progressbar("wash_hands", Config.Locals["Progressbars"]["WashHands"]["Text"], Config.Locals["Progressbars"]["WashHands"]["Time"], false, true, {
@@ -149,7 +129,7 @@ RegisterNetEvent('CL-Pizzeria:WashHands', function(data)
                 anim = 'a_uncuff',
 				flags = 49,
 			}, {}, {}, function()
-				TriggerServerEvent('hud:server:RelieveStress', Config.WashingHandsStress)
+				TriggerServerEvent('hud:server:RelieveStress', Config.HaandvaskStress)
 			end, function()
 				QBCore.Functions.Notify("Canceled...", "error")
 			end)
@@ -159,8 +139,8 @@ RegisterNetEvent('CL-Pizzeria:WashHands', function(data)
 	end)
 end)
 
-RegisterNetEvent('CL-Pizzeria:OpenBossStash', function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent('Gustav-Pizzeria:OpenBossStash', function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 		if result then
 			TriggerServerEvent("inventory:server:OpenInventory", "stash", "Pizza This Boss Storage") 
 			TriggerEvent("inventory:client:SetCurrentStash", "Pizza This Boss Storage")
@@ -170,18 +150,18 @@ RegisterNetEvent('CL-Pizzeria:OpenBossStash', function()
 	end)
 end)
 
-RegisterNetEvent('CL-Pizzeria:OpenFoodFridge', function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent('Gustav-Pizzeria:OpenFoodFridge', function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 		if result then
-			TriggerServerEvent("inventory:server:OpenInventory", "shop", "Food Fridge", Config.FoodFridgeItems)
+			TriggerServerEvent("inventory:server:OpenInventory", "shop", "Food Fridge", Config.MadKoeleskabsTing)
 		else
             QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
         end
 	end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:OpenPersonalStash", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:OpenPersonalStash", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 		if result then
 			TriggerServerEvent("inventory:server:OpenInventory", "stash", "pizzathisstash_"..QBCore.Functions.GetPlayerData().citizenid)
 			TriggerEvent("inventory:client:SetCurrentStash", "pizzathisstash_"..QBCore.Functions.GetPlayerData().citizenid)
@@ -191,8 +171,8 @@ RegisterNetEvent("CL-Pizzeria:OpenPersonalStash", function()
 	end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:MakeDrink", function(data)
-    QBCore.Functions.TriggerCallback('CL-Pizzeria:HasItem', function(result)
+RegisterNetEvent("Gustav-Pizzeria:MakeDrink", function(data)
+    QBCore.Functions.TriggerCallback('Gustav-Pizzeria:HasItem', function(result)
         if result then
             QBCore.Functions.Progressbar("make_"..data.drink, "Pouring " ..data.drinkname, 5000, false, true, {
 				disableMovement = true,
@@ -205,8 +185,8 @@ RegisterNetEvent("CL-Pizzeria:MakeDrink", function(data)
 				flags = 49,
 			}, {}, {}, function()
                 QBCore.Functions.Notify(data.drinkname .. " Successfully Made", "success")
-                TriggerServerEvent("CL-Pizzeria:RemoveItem", data.glass, 1)
-                TriggerServerEvent("CL-Pizzeria:AddItem", data.drink, 1)
+                TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.glass, 1)
+                TriggerServerEvent("Gustav-Pizzeria:AddItem", data.drink, 1)
 				TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.drink], "add")
 			end, function()
 				QBCore.Functions.Notify("Canceled...", "error")
@@ -217,7 +197,7 @@ RegisterNetEvent("CL-Pizzeria:MakeDrink", function(data)
     end, data.glass)
 end)
 
-RegisterNetEvent("CL-Pizzeria:Drink", function(item, ischampagne, itemname, anim, animdict, model, bones, coords, thirst)
+RegisterNetEvent("Gustav-Pizzeria:Drink", function(item, ischampagne, itemname, anim, animdict, model, bones, coords, thirst)
 	if ischampagne then
 		QBCore.Functions.Progressbar("drinking_"..item, "Drinking " ..itemname, 3700, false, true, {
 			disableMovement = false,
@@ -230,12 +210,8 @@ RegisterNetEvent("CL-Pizzeria:Drink", function(item, ischampagne, itemname, anim
 			flags = 49,
 		}, {}, {}, function()
 			QBCore.Functions.Notify("You Have Drank " ..itemname, "success")
-			if Config.ConsumablesVersion == "old" then
-				TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + Config.Thirst["Champagne"])
-			elseif Config.ConsumablesVersion == "new" then
-				TriggerServerEvent("CL-Pizzeria:AddThirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + Config.Thirst["Champagne"])
-			end	
-			TriggerServerEvent("CL-Pizzeria:RemoveItem", item, 1)
+			TriggerServerEvent("Gustav-Pizzeria:AddThirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + Config.Toerst["Champagne"])
+			TriggerServerEvent("Gustav-Pizzeria:RemoveItem", item, 1)
 			AlcoholEffect()
 		end, function()
 			QBCore.Functions.Notify("Canceled...", "error")
@@ -256,12 +232,8 @@ RegisterNetEvent("CL-Pizzeria:Drink", function(item, ischampagne, itemname, anim
 			coords = { x=coords.x, y=coords.y, z=coords.z },
 		}, {}, function()
 			QBCore.Functions.Notify("You Have Drank " ..itemname, "success")
-			if Config.ConsumablesVersion == "old" then
-				TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + thirst)
-			elseif Config.ConsumablesVersion == "new" then
-				TriggerServerEvent("CL-Pizzeria:AddThirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + thirst)
-			end
-			TriggerServerEvent("CL-Pizzeria:RemoveItem", item, 1)
+			TriggerServerEvent("Gustav-Pizzeria:AddThirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + thirst)
+			TriggerServerEvent("Gustav-Pizzeria:RemoveItem", item, 1)
 			drinked = drinked + 1
 			if drinked >= 3 then
 				QBCore.Functions.Notify(Config.Locals["Notifications"]["DrinkedEnough"])
@@ -274,7 +246,7 @@ RegisterNetEvent("CL-Pizzeria:Drink", function(item, ischampagne, itemname, anim
 	end
 end)
 
-RegisterNetEvent("CL-Pizzeria:Grab", function(data)
+RegisterNetEvent("Gustav-Pizzeria:Grab", function(data)
     QBCore.Functions.Progressbar("grab_"..data.gdrink, "Grabing " ..data.gdrinkname, data.time, false, true, {
         disableMovement = true,
         disableCarMovement = false,
@@ -286,7 +258,7 @@ RegisterNetEvent("CL-Pizzeria:Grab", function(data)
         flags = 49,
     }, {}, {}, function()
         QBCore.Functions.Notify("You grabbed " ..data.gdrinkname, "success")
-        TriggerServerEvent("CL-Pizzeria:AddItem", data.gdrink, 1)
+        TriggerServerEvent("Gustav-Pizzeria:AddItem", data.gdrink, 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.gdrink], "add")
 		if data.dough then
 			dough = dough - 1
@@ -296,9 +268,9 @@ RegisterNetEvent("CL-Pizzeria:Grab", function(data)
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:Make", function(data)
+RegisterNetEvent("Gustav-Pizzeria:Make", function(data)
 	if not data.qbcoreevent then
-		QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckFor'..data.eventname..'Items', function(HasItems)
+		QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckFor'..data.eventname..'Items', function(HasItems)
 			if HasItems then
 				QBCore.Functions.Progressbar("make", "Making "..data.itemname, data.time, false, true, {
 					disableMovement = true,
@@ -311,22 +283,22 @@ RegisterNetEvent("CL-Pizzeria:Make", function(data)
 					flags = 49,
 				}, {}, {}, function()
 					if data.item4 then
-						TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item4, 1)
+						TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item4, 1)
 						TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item4], "remove")
 					end
 					if data.item5 then
-						TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item5, 1)
+						TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item5, 1)
 						TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item5], "remove")
 					end
 					if data.item6 then
-						TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item6, 1)
+						TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item6, 1)
 						TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item6], "remove")
 					end
-					TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item2, 1)
+					TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item2, 1)
 					TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item2], "remove")
-					TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item3, 1)
+					TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item3, 1)
 					TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item3], "remove")
-					TriggerServerEvent("CL-Pizzeria:AddItem", data.recieveitem, data.number)
+					TriggerServerEvent("Gustav-Pizzeria:AddItem", data.recieveitem, data.number)
 					TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.recieveitem], "add")
 				end, function()
 					QBCore.Functions.Notify("Canceled...", "error")
@@ -336,7 +308,7 @@ RegisterNetEvent("CL-Pizzeria:Make", function(data)
 			end
 		end)
 	else
-		QBCore.Functions.TriggerCallback('CL-Pizzeria:HasItem', function(HasItems)
+		QBCore.Functions.TriggerCallback('Gustav-Pizzeria:HasItem', function(HasItems)
 			if HasItems then
 				QBCore.Functions.Progressbar("make", "Making "..data.itemname, data.time, false, true, {
 					disableMovement = true,
@@ -349,18 +321,18 @@ RegisterNetEvent("CL-Pizzeria:Make", function(data)
 					flags = 49,
 				}, {}, {}, function()
 					if data.item4 then
-						TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item4, 1)
+						TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item4, 1)
 						TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item4], "remove")
 					elseif data.item5 then
-						TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item5, 1)
+						TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item5, 1)
 						TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item5], "remove")
 					elseif data.item6 then
-						TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item6, 1)
+						TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item6, 1)
 						TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item6], "remove")
 					end
-					TriggerServerEvent("CL-Pizzeria:RemoveItem", data.item2, 1)
+					TriggerServerEvent("Gustav-Pizzeria:RemoveItem", data.item2, 1)
 					TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.item2], "remove")
-					TriggerServerEvent("CL-Pizzeria:AddItem", data.recieveitem, data.number)
+					TriggerServerEvent("Gustav-Pizzeria:AddItem", data.recieveitem, data.number)
 					TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[data.recieveitem], "add")
 				end, function()
 					QBCore.Functions.Notify("Canceled...", "error")
@@ -372,7 +344,7 @@ RegisterNetEvent("CL-Pizzeria:Make", function(data)
 	end
 end)
 
-RegisterNetEvent('CL-Pizzeria:OpenMenu', function()
+RegisterNetEvent('Gustav-Pizzeria:OpenMenu', function()
   	SendNUIMessage({action = 'OpenMenu'})
 	Citizen.CreateThread(function()
         while true do
@@ -387,14 +359,14 @@ RegisterNetEvent('CL-Pizzeria:OpenMenu', function()
 	end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:AddDough", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:HasItem', function(result)
+RegisterNetEvent("Gustav-Pizzeria:AddDough", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:HasItem', function(result)
 		if result then
 			if dough >= 12 then
 				QBCore.Functions.Notify(Config.Locals["Notifications"]["StorageFull"], "error")
 			else
 				dough = dough + 1
-				TriggerServerEvent("CL-Pizzeria:RemoveItem", "pdough", 1)
+				TriggerServerEvent("Gustav-Pizzeria:RemoveItem", "pdough", 1)
 				TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["pdough"], "remove")
 				QBCore.Functions.Notify(Config.Locals["Notifications"]["DoughAdded"], "success")
 			end
@@ -404,7 +376,7 @@ RegisterNetEvent("CL-Pizzeria:AddDough", function()
 	end, 'pdough')
 end)
 
-RegisterNetEvent("CL-Pizzeria:Eat", function(fruit, item, itemname, time, hunger, anim, animdict, model, bones, coords)
+RegisterNetEvent("Gustav-Pizzeria:Eat", function(fruit, item, itemname, time, hunger, anim, animdict, model, bones, coords)
 	if not fruit then
 		QBCore.Functions.Progressbar("eat_"..item, "Eating " ..itemname, time, false, true, {
 			disableMovement = false,
@@ -421,13 +393,9 @@ RegisterNetEvent("CL-Pizzeria:Eat", function(fruit, item, itemname, time, hunger
 			coords = { x=coords.x, y=coords.y, z=coords.z },
 		}, {}, function()
 			QBCore.Functions.Notify("You eated " ..itemname, "success")
-			TriggerServerEvent("CL-Pizzeria:RemoveItem", item, 1)
+			TriggerServerEvent("Gustav-Pizzeria:RemoveItem", item, 1)
 			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[item], "remove")
-			if Config.ConsumablesVersion == "old" then
-				TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + hunger)
-			elseif Config.ConsumablesVersion == "new" then
-				TriggerServerEvent("CL-Pizzeria:AddHunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + hunger)
-			end
+			TriggerServerEvent("Gustav-Pizzeria:AddHunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + hunger)
 		end, function()
 			QBCore.Functions.Notify("Canceled...", "error")
 		end)
@@ -443,13 +411,9 @@ RegisterNetEvent("CL-Pizzeria:Eat", function(fruit, item, itemname, time, hunger
 			flags = 49,
 		}, {}, {}, function()
 			QBCore.Functions.Notify("You eated " ..itemname, "success")
-			TriggerServerEvent("CL-Pizzeria:RemoveItem", item, 1)
+			TriggerServerEvent("Gustav-Pizzeria:RemoveItem", item, 1)
 			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[item], "remove")
-			if Config.ConsumablesVersion == "old" then
-				TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + hunger)
-			elseif Config.ConsumablesVersion == "new" then
-				TriggerServerEvent("CL-Pizzeria:AddHunger", hunger)
-			end
+			TriggerServerEvent("Gustav-Pizzeria:AddHunger", hunger)
 		end, function()
 			QBCore.Functions.Notify("Canceled...", "error")
 		end)
@@ -457,26 +421,26 @@ RegisterNetEvent("CL-Pizzeria:Eat", function(fruit, item, itemname, time, hunger
 end)
 
 Citizen.CreateThread(function()
-	exports[Config.Target]:AddBoxZone("Duty", vector3(Config.Locations["Duty"]["Coords"].x, Config.Locations["Duty"]["Coords"].y, Config.Locations["Duty"]["Coords"].z), 0.3, 0.6, {
+	exports[Config.Target]:AddBoxZone("Duty", vector3(Config.Sted["Duty"]["Coords"].x, Config.Sted["Duty"]["Coords"].y, Config.Sted["Duty"]["Coords"].z), 0.3, 0.6, {
 		name = "Duty",
-		heading = Config.Locations["Duty"]["Heading"],
+		heading = Config.Sted["Duty"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Duty"]["minZ"],
-		maxZ = Config.Locations["Duty"]["maxZ"],
+		minZ = Config.Sted["Duty"]["minZ"],
+		maxZ = Config.Sted["Duty"]["maxZ"],
 		}, {
 			options = { 
 			{
 				type = "client",
-                event = "CL-Pizzeria:DutyMenu",
+                event = "Gustav-Pizzeria:DutyMenu",
 				icon = Config.Locals['Targets']['Duty']['Icon'],
 				label = Config.Locals['Targets']['Duty']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	for k, v in pairs(Config.Locations["WashHands"]) do
+	for k, v in pairs(Config.Sted["WashHands"]) do
         exports[Config.Target]:AddBoxZone("WashHands"..k, vector3(v.coords.x, v.coords.y, v.coords.z), v.poly1, v.poly2, {
             name = "WashHands"..k,
             heading = v.heading,
@@ -487,50 +451,50 @@ Citizen.CreateThread(function()
                 options = { 
                 {
                     type = "client",
-					event = "CL-Pizzeria:WashHands",
+					event = "Gustav-Pizzeria:WashHands",
 					icon = Config.Locals['Targets']['WashHands']['Icon'],
 					label = Config.Locals['Targets']['WashHands']['Label'],
 					heading = v.heading,
-					job = Config.Job,
+					job = Config.Arbejde,
                 }
             },
             distance = 1.2,
         })
     end
     
-    exports[Config.Target]:AddBoxZone("Shop", vector3(Config.Locations["Shop"]["Coords"].x, Config.Locations["Shop"]["Coords"].y, Config.Locations["Shop"]["Coords"].z), 0.5, 1.0, {
+    exports[Config.Target]:AddBoxZone("Shop", vector3(Config.Sted["Shop"]["Coords"].x, Config.Sted["Shop"]["Coords"].y, Config.Sted["Shop"]["Coords"].z), 0.5, 1.0, {
 		name = "Shop",
-		heading = Config.Locations["Shop"]["Heading"],
+		heading = Config.Sted["Shop"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Shop"]["minZ"],
-		maxZ = Config.Locations["Shop"]["maxZ"],
+		minZ = Config.Sted["Shop"]["minZ"],
+		maxZ = Config.Sted["Shop"]["maxZ"],
 		}, {
 			options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenShop",
+				event = "Gustav-Pizzeria:OpenShop",
 				icon = Config.Locals['Targets']['Shop']['Icon'],
 				label = Config.Locals['Targets']['Shop']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-    exports[Config.Target]:AddBoxZone("Stash", vector3(Config.Locations["Stash"]["Coords"].x, Config.Locations["Stash"]["Coords"].y, Config.Locations["Stash"]["Coords"].z), 0.5, 1.5, {
+    exports[Config.Target]:AddBoxZone("Stash", vector3(Config.Sted["Stash"]["Coords"].x, Config.Sted["Stash"]["Coords"].y, Config.Sted["Stash"]["Coords"].z), 0.5, 1.5, {
 		name = "Stash",
-		heading = Config.Locations["Stash"]["Heading"],
+		heading = Config.Sted["Stash"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Stash"]["minZ"],
-		maxZ = Config.Locations["Stash"]["maxZ"],
+		minZ = Config.Sted["Stash"]["minZ"],
+		maxZ = Config.Sted["Stash"]["maxZ"],
 		}, {
 			options = { 
 			{
 				icon = Config.Locals['Targets']['Stash']['Icon'],
 				label = Config.Locals['Targets']['Stash']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 				action = function()
-					QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+					QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
 						if result then
 							TriggerServerEvent("inventory:server:OpenInventory", "stash", "Pizza This Stash", {maxweight = 100000, slots = 100})
 							TriggerEvent("inventory:client:SetCurrentStash", "Pizza This Stash") 
@@ -544,96 +508,96 @@ Citizen.CreateThread(function()
 		distance = 1.2,
 	})
     
-    exports[Config.Target]:AddBoxZone("Glasses", vector3(Config.Locations["Glasses"]["Coords"].x, Config.Locations["Glasses"]["Coords"].y, Config.Locations["Glasses"]["Coords"].z), 0.5, 1.0, {
+    exports[Config.Target]:AddBoxZone("Glasses", vector3(Config.Sted["Glasses"]["Coords"].x, Config.Sted["Glasses"]["Coords"].y, Config.Sted["Glasses"]["Coords"].z), 0.5, 1.0, {
 		name = "Glasses",
-		heading = Config.Locations["Glasses"]["Heading"],
+		heading = Config.Sted["Glasses"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Glasses"]["minZ"],
-		maxZ = Config.Locations["Glasses"]["maxZ"],
+		minZ = Config.Sted["Glasses"]["minZ"],
+		maxZ = Config.Sted["Glasses"]["maxZ"],
 		}, {
 			options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:GlassesMenu",
+				event = "Gustav-Pizzeria:GlassesMenu",
 				icon = Config.Locals['Targets']['Glasses']['Icon'],
 				label = Config.Locals['Targets']['Glasses']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-    exports[Config.Target]:AddBoxZone("DrinksMachine", vector3(Config.Locations["DrinksMachine"]["Coords"].x, Config.Locations["DrinksMachine"]["Coords"].y, Config.Locations["DrinksMachine"]["Coords"].z), 0.5, 1.0, {
+    exports[Config.Target]:AddBoxZone("DrinksMachine", vector3(Config.Sted["DrinksMachine"]["Coords"].x, Config.Sted["DrinksMachine"]["Coords"].y, Config.Sted["DrinksMachine"]["Coords"].z), 0.5, 1.0, {
 		name = "DrinksMachine",
-		heading = Config.Locations["DrinksMachine"]["Heading"],
+		heading = Config.Sted["DrinksMachine"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["DrinksMachine"]["minZ"],
-		maxZ = Config.Locations["DrinksMachine"]["maxZ"],
+		minZ = Config.Sted["DrinksMachine"]["minZ"],
+		maxZ = Config.Sted["DrinksMachine"]["maxZ"],
 		}, {
 			options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:DrinksMachineMenu",
+				event = "Gustav-Pizzeria:DrinksMachineMenu",
 				icon = Config.Locals['Targets']['DrinksMachine']['Icon'],
 				label = Config.Locals['Targets']['DrinksMachine']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-    exports[Config.Target]:AddBoxZone("GrabDrinks", vector3(Config.Locations["GrabDrinks"]["Coords"].x, Config.Locations["GrabDrinks"]["Coords"].y, Config.Locations["GrabDrinks"]["Coords"].z), 0.5, 2.0, {
+    exports[Config.Target]:AddBoxZone("GrabDrinks", vector3(Config.Sted["GrabDrinks"]["Coords"].x, Config.Sted["GrabDrinks"]["Coords"].y, Config.Sted["GrabDrinks"]["Coords"].z), 0.5, 2.0, {
 		name = "GrabDrinks",
-		heading = Config.Locations["GrabDrinks"]["Heading"],
+		heading = Config.Sted["GrabDrinks"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["GrabDrinks"]["minZ"],
-		maxZ = Config.Locations["GrabDrinks"]["maxZ"],
+		minZ = Config.Sted["GrabDrinks"]["minZ"],
+		maxZ = Config.Sted["GrabDrinks"]["maxZ"],
 		}, {
 			options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:GrabDrinksMenu",
+				event = "Gustav-Pizzeria:GrabDrinksMenu",
 				icon = Config.Locals['Targets']['GrabDrinks']['Icon'],
 				label = Config.Locals['Targets']['GrabDrinks']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("BossStash", vector3(Config.Locations["BossStash"]["Coords"].x, Config.Locations["BossStash"]["Coords"].y, Config.Locations["BossStash"]["Coords"].z), 0.5, 0.7, {
+	exports[Config.Target]:AddBoxZone("BossStash", vector3(Config.Sted["BossStash"]["Coords"].x, Config.Sted["BossStash"]["Coords"].y, Config.Sted["BossStash"]["Coords"].z), 0.5, 0.7, {
 		name = "BossStash",
-		heading = Config.Locations["BossStash"]["Heading"],
+		heading = Config.Sted["BossStash"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["BossStash"]["minZ"],
-		maxZ = Config.Locations["BossStash"]["maxZ"],
+		minZ = Config.Sted["BossStash"]["minZ"],
+		maxZ = Config.Sted["BossStash"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenBossStash",
+				event = "Gustav-Pizzeria:OpenBossStash",
 				icon = Config.Locals['Targets']['BossStash']['Icon'],
 				label = Config.Locals['Targets']['BossStash']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("GrabBossDrinks", vector3(Config.Locations["GrabBossDrinks"]["Coords"].x, Config.Locations["GrabBossDrinks"]["Coords"].y, Config.Locations["BossStash"]["Coords"].z), 0.9, 0.7, {
+	exports[Config.Target]:AddBoxZone("GrabBossDrinks", vector3(Config.Sted["GrabBossDrinks"]["Coords"].x, Config.Sted["GrabBossDrinks"]["Coords"].y, Config.Sted["BossStash"]["Coords"].z), 0.9, 0.7, {
 		name = "GrabBossDrinks",
-		heading = Config.Locations["GrabBossDrinks"]["Heading"],
+		heading = Config.Sted["GrabBossDrinks"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["GrabBossDrinks"]["minZ"],
-		maxZ = Config.Locations["GrabBossDrinks"]["maxZ"],
+		minZ = Config.Sted["GrabBossDrinks"]["minZ"],
+		maxZ = Config.Sted["GrabBossDrinks"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:GrabBossDrinksMenu",
+				event = "Gustav-Pizzeria:GrabBossDrinksMenu",
 				icon = Config.Locals['Targets']['GrabBossDrinks']['Icon'],
 				label = Config.Locals['Targets']['GrabBossDrinks']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 				canInteract = function()
 				 	if PlayerJob.isboss then
 				 		return true
@@ -646,36 +610,36 @@ Citizen.CreateThread(function()
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("Fruits", vector3(Config.Locations["Fruits"]["Coords"].x, Config.Locations["Fruits"]["Coords"].y, Config.Locations["Fruits"]["Coords"].z), 0.4, 0.4, {
+	exports[Config.Target]:AddBoxZone("Fruits", vector3(Config.Sted["Fruits"]["Coords"].x, Config.Sted["Fruits"]["Coords"].y, Config.Sted["Fruits"]["Coords"].z), 0.4, 0.4, {
 		name = "Fruits",
-		heading = Config.Locations["Fruits"]["Heading"],
+		heading = Config.Sted["Fruits"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Fruits"]["minZ"],
-		maxZ = Config.Locations["Fruits"]["maxZ"],
+		minZ = Config.Sted["Fruits"]["minZ"],
+		maxZ = Config.Sted["Fruits"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:FruitsMenu",
+				event = "Gustav-Pizzeria:FruitsMenu",
 				icon = Config.Locals['Targets']['Fruits']['Icon'],
 				label = Config.Locals['Targets']['Fruits']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("GrabWater", vector3(Config.Locations["GrabWater"]["Coords"].x, Config.Locations["GrabWater"]["Coords"].y, Config.Locations["GrabWater"]["Coords"].z), 0.4, 0.4, {
+	exports[Config.Target]:AddBoxZone("GrabWater", vector3(Config.Sted["GrabWater"]["Coords"].x, Config.Sted["GrabWater"]["Coords"].y, Config.Sted["GrabWater"]["Coords"].z), 0.4, 0.4, {
 		name = "GrabWater",
-		heading = Config.Locations["GrabWater"]["Heading"],
+		heading = Config.Sted["GrabWater"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["GrabWater"]["minZ"],
-		maxZ = Config.Locations["GrabWater"]["maxZ"],
+		minZ = Config.Sted["GrabWater"]["minZ"],
+		maxZ = Config.Sted["GrabWater"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:Grab",
+				event = "Gustav-Pizzeria:Grab",
 				icon = Config.Locals['Targets']['GrabWater']['Icon'],
 				label = Config.Locals['Targets']['GrabWater']['Label'],
 				gdrinkname = "Water Cup",
@@ -683,23 +647,23 @@ Citizen.CreateThread(function()
 				animationdict = "pickup_object",
 				animation = "putdown_low",
 				time = 3000,
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("GrabCoffee", vector3(Config.Locations["GrabCoffee"]["Coords"].x, Config.Locations["GrabCoffee"]["Coords"].y, Config.Locations["GrabCoffee"]["Coords"].z), 0.5, 0.2, {
+	exports[Config.Target]:AddBoxZone("GrabCoffee", vector3(Config.Sted["GrabCoffee"]["Coords"].x, Config.Sted["GrabCoffee"]["Coords"].y, Config.Sted["GrabCoffee"]["Coords"].z), 0.5, 0.2, {
 		name = "GrabCoffee",
-		heading = Config.Locations["GrabCoffee"]["Heading"],
+		heading = Config.Sted["GrabCoffee"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["GrabCoffee"]["minZ"],
-		maxZ = Config.Locations["GrabCoffee"]["maxZ"],
+		minZ = Config.Sted["GrabCoffee"]["minZ"],
+		maxZ = Config.Sted["GrabCoffee"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:Grab",
+				event = "Gustav-Pizzeria:Grab",
 				icon = Config.Locals['Targets']['GrabCoffee']['Icon'],
 				label = Config.Locals['Targets']['GrabCoffee']['Label'],
 				gdrinkname = "Coffee",
@@ -707,33 +671,33 @@ Citizen.CreateThread(function()
 				animationdict = "anim@amb@clubhouse@bar@drink@base",
 				animation = "idle_a",
 				time = 5000,
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("Fridge", vector3(Config.Locations["Fridge"]["Coords"].x, Config.Locations["Fridge"]["Coords"].y, Config.Locations["Fridge"]["Coords"].z), 0.7, 0.7, {
-		name = "Fridge",
-		heading = Config.Locations["Fridge"]["Heading"],
-		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Fridge"]["minZ"],
-		maxZ = Config.Locations["Fridge"]["maxZ"],
-	}, {
-		options = { 
-			{
-				icon = Config.Locals['Targets']['Fridge']['Icon'],
-				label = Config.Locals['Targets']['Fridge']['Label'],
-				job = Config.Job,
-				action = function()
-					TriggerServerEvent("inventory:server:OpenInventory", "shop", "Fridge", Config.FridgeItems)
-				end,
-			},
-		},
-		distance = 1.2,
-	})
+	-- exports[Config.Target]:AddBoxZone("Fridge", vector3(Config.Sted["Fridge"]["Coords"].x, Config.Sted["Fridge"]["Coords"].y, Config.Sted["Fridge"]["Coords"].z), 0.7, 0.7, {
+	-- 	name = "Fridge",
+	-- 	heading = Config.Sted["Fridge"]["Heading"],
+	-- 	debugPoly = Config.PolyZone,
+	-- 	minZ = Config.Sted["Fridge"]["minZ"],
+	-- 	maxZ = Config.Sted["Fridge"]["maxZ"],
+	-- }, {
+	-- 	options = { 
+	-- 		{
+	-- 			icon = Config.Locals['Targets']['Fridge']['Icon'],
+	-- 			label = Config.Locals['Targets']['Fridge']['Label'],
+	-- 			job = Config.Arbejde,
+	-- 			action = function()
+	-- 				TriggerServerEvent("inventory:server:OpenInventory", "shop", "Fridge", Config.Koeleskabsting)
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- 	distance = 1.2,
+	-- })
 
-	for k, v in pairs(Config.Locations["Lockers"]) do
+	for k, v in pairs(Config.Sted["Lockers"]) do
         exports[Config.Target]:AddBoxZone("Locker"..k, vector3(v.coords.x, v.coords.y, v.coords.z), v.poly1, v.poly2, {
             name = "Locker"..k,
             heading = v.heading,
@@ -747,19 +711,19 @@ Citizen.CreateThread(function()
 					event = "qb-clothing:client:openMenu",
 					icon = Config.Locals['Targets']['Lockers']['Icon'],
 					label = Config.Locals['Targets']['Lockers']['Label'],
-					job = Config.Job,
+					job = Config.Arbejde,
                 }
             },
             distance = 1.2,
         })
     end
 
-	exports[Config.Target]:AddBoxZone("PizzaThis-Bossmenu", vector3(Config.Locations["Bossmenu"]["Coords"].x, Config.Locations["Bossmenu"]["Coords"].y, Config.Locations["Bossmenu"]["Coords"].z), 1.2, 2.6, {
+	exports[Config.Target]:AddBoxZone("PizzaThis-Bossmenu", vector3(Config.Sted["Bossmenu"]["Coords"].x, Config.Sted["Bossmenu"]["Coords"].y, Config.Sted["Bossmenu"]["Coords"].z), 1.2, 2.6, {
 		name = "PizzaThis-Bossmenu",
-		heading = Config.Locations["Bossmenu"]["Heading"],
+		heading = Config.Sted["Bossmenu"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Bossmenu"]["minZ"],
-		maxZ = Config.Locations["Bossmenu"]["maxZ"],
+		minZ = Config.Sted["Bossmenu"]["minZ"],
+		maxZ = Config.Sted["Bossmenu"]["maxZ"],
 	}, {
 		options = { 
 			{
@@ -767,7 +731,7 @@ Citizen.CreateThread(function()
 				event = "qb-bossmenu:client:OpenMenu",
 				icon = Config.Locals['Targets']['Bossmenu']['Icon'],
 				label = Config.Locals['Targets']['Bossmenu']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 				canInteract = function() 
 					return PlayerJob.isboss
 				end,
@@ -776,26 +740,26 @@ Citizen.CreateThread(function()
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("Dough", vector3(Config.Locations["Dough"]["Coords"].x, Config.Locations["Dough"]["Coords"].y, Config.Locations["Dough"]["Coords"].z), 0.6, 0.6, {
+	exports[Config.Target]:AddBoxZone("Dough", vector3(Config.Sted["Dough"]["Coords"].x, Config.Sted["Dough"]["Coords"].y, Config.Sted["Dough"]["Coords"].z), 0.6, 0.6, {
 		name = "Dough",
-		heading = Config.Locations["Dough"]["Heading"],
+		heading = Config.Sted["Dough"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Dough"]["minZ"],
-		maxZ = Config.Locations["Dough"]["maxZ"],
+		minZ = Config.Sted["Dough"]["minZ"],
+		maxZ = Config.Sted["Dough"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:DoughMenu",
+				event = "Gustav-Pizzeria:DoughMenu",
 				icon = Config.Locals['Targets']['Dough']['Icon'],
 				label = Config.Locals['Targets']['Dough']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	for k, v in pairs(Config.Locations["WineRacks"]) do
+	for k, v in pairs(Config.Sted["WineRacks"]) do
         exports[Config.Target]:AddBoxZone("WineRacks"..k, vector3(v.coords.x, v.coords.y, v.coords.z), v.poly1, v.poly2, {
             name = "WineRack"..k,
             heading = v.heading,
@@ -806,150 +770,150 @@ Citizen.CreateThread(function()
                 options = { 
                 {
                     type = "client",
-					event = "CL-Pizzeria:WineRackMenu",
+					event = "Gustav-Pizzeria:WineRackMenu",
 					icon = Config.Locals['Targets']['WineRacks']['Icon'],
 					label = Config.Locals['Targets']['WineRacks']['Label'],
-					job = Config.Job,
+					job = Config.Arbejde,
                 }
             },
             distance = 1.2,
         })
 	end
 
-	exports[Config.Target]:AddBoxZone("PersonalStash", vector3(Config.Locations["PersonalStash"]["Coords"].x, Config.Locations["PersonalStash"]["Coords"].y, Config.Locations["PersonalStash"]["Coords"].z), 0.6, 1.2, {
+	exports[Config.Target]:AddBoxZone("PersonalStash", vector3(Config.Sted["PersonalStash"]["Coords"].x, Config.Sted["PersonalStash"]["Coords"].y, Config.Sted["PersonalStash"]["Coords"].z), 0.6, 1.2, {
 		name = "PersonalStash",
-		heading = Config.Locations["PersonalStash"]["Heading"],
+		heading = Config.Sted["PersonalStash"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["PersonalStash"]["minZ"],
-		maxZ = Config.Locations["PersonalStash"]["maxZ"],
+		minZ = Config.Sted["PersonalStash"]["minZ"],
+		maxZ = Config.Sted["PersonalStash"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenPersonalStash",
+				event = "Gustav-Pizzeria:OpenPersonalStash",
 				icon = Config.Locals['Targets']['PersonalStash']['Icon'],
 				label = Config.Locals['Targets']['PersonalStash']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("DoughMachine", vector3(Config.Locations["DoughMachine"]["Coords"].x, Config.Locations["DoughMachine"]["Coords"].y, Config.Locations["DoughMachine"]["Coords"].z), 1.0, 0.6, {
+	exports[Config.Target]:AddBoxZone("DoughMachine", vector3(Config.Sted["DoughMachine"]["Coords"].x, Config.Sted["DoughMachine"]["Coords"].y, Config.Sted["DoughMachine"]["Coords"].z), 1.0, 0.6, {
 		name = "DoughMachine",
-		heading = Config.Locations["DoughMachine"]["Heading"],
+		heading = Config.Sted["DoughMachine"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["DoughMachine"]["minZ"],
-		maxZ = Config.Locations["DoughMachine"]["maxZ"],
+		minZ = Config.Sted["DoughMachine"]["minZ"],
+		maxZ = Config.Sted["DoughMachine"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenDoughMachineMenu",
+				event = "Gustav-Pizzeria:OpenDoughMachineMenu",
 				icon = Config.Locals['Targets']['DoughMachine']['Icon'],
 				label = Config.Locals['Targets']['DoughMachine']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("DoughPrepare", vector3(Config.Locations["DoughPrepare"]["Coords"].x, Config.Locations["DoughPrepare"]["Coords"].y, Config.Locations["DoughPrepare"]["Coords"].z), 0.6, 1.9, {
+	exports[Config.Target]:AddBoxZone("DoughPrepare", vector3(Config.Sted["DoughPrepare"]["Coords"].x, Config.Sted["DoughPrepare"]["Coords"].y, Config.Sted["DoughPrepare"]["Coords"].z), 0.6, 1.9, {
 		name = "DoughPrepare",
-		heading = Config.Locations["DoughPrepare"]["Heading"],
+		heading = Config.Sted["DoughPrepare"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["DoughPrepare"]["minZ"],
-		maxZ = Config.Locations["DoughPrepare"]["maxZ"],
+		minZ = Config.Sted["DoughPrepare"]["minZ"],
+		maxZ = Config.Sted["DoughPrepare"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenPrepareDoughMenu",
+				event = "Gustav-Pizzeria:OpenPrepareDoughMenu",
 				icon = Config.Locals['Targets']['DoughPrepare']['Icon'],
 				label = Config.Locals['Targets']['DoughPrepare']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("CoffeeCups", vector3(Config.Locations["CoffeeCups"]["Coords"].x, Config.Locations["CoffeeCups"]["Coords"].y, Config.Locations["CoffeeCups"]["Coords"].z), 0.5, 1.0, {
+	exports[Config.Target]:AddBoxZone("CoffeeCups", vector3(Config.Sted["CoffeeCups"]["Coords"].x, Config.Sted["CoffeeCups"]["Coords"].y, Config.Sted["CoffeeCups"]["Coords"].z), 0.5, 1.0, {
 		name = "CoffeeCups",
-		heading = Config.Locations["CoffeeCups"]["Heading"],
+		heading = Config.Sted["CoffeeCups"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["CoffeeCups"]["minZ"],
-		maxZ = Config.Locations["CoffeeCups"]["maxZ"],
+		minZ = Config.Sted["CoffeeCups"]["minZ"],
+		maxZ = Config.Sted["CoffeeCups"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:CoffeeCupsMenu",
+				event = "Gustav-Pizzeria:CoffeeCupsMenu",
 				icon = Config.Locals['Targets']['CoffeeCups']['Icon'],
 				label = Config.Locals['Targets']['CoffeeCups']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.5,
 	})
 
-	exports[Config.Target]:AddBoxZone("FoodFridge", vector3(Config.Locations["FoodFridge"]["Coords"].x, Config.Locations["FoodFridge"]["Coords"].y, Config.Locations["FoodFridge"]["Coords"].z), 0.8, 1.3, {
+	exports[Config.Target]:AddBoxZone("FoodFridge", vector3(Config.Sted["FoodFridge"]["Coords"].x, Config.Sted["FoodFridge"]["Coords"].y, Config.Sted["FoodFridge"]["Coords"].z), 0.8, 1.3, {
 		name = "FoodFridge",
-		heading = Config.Locations["FoodFridge"]["Heading"],
+		heading = Config.Sted["FoodFridge"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["FoodFridge"]["minZ"],
-		maxZ = Config.Locations["FoodFridge"]["maxZ"],
+		minZ = Config.Sted["FoodFridge"]["minZ"],
+		maxZ = Config.Sted["FoodFridge"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenFoodFridge",
+				event = "Gustav-Pizzeria:OpenFoodFridge",
 				icon = Config.Locals['Targets']['FoodFridge']['Icon'],
 				label = Config.Locals['Targets']['FoodFridge']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("CoffeeMachine", vector3(Config.Locations["CoffeeMachine"]["Coords"].x, Config.Locations["CoffeeMachine"]["Coords"].y, Config.Locations["CoffeeMachine"]["Coords"].z), 0.5, 0.7, {
+	exports[Config.Target]:AddBoxZone("CoffeeMachine", vector3(Config.Sted["CoffeeMachine"]["Coords"].x, Config.Sted["CoffeeMachine"]["Coords"].y, Config.Sted["CoffeeMachine"]["Coords"].z), 0.5, 0.7, {
 		name = "CoffeeMachine",
-		heading = Config.Locations["CoffeeMachine"]["Heading"],
+		heading = Config.Sted["CoffeeMachine"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["CoffeeMachine"]["minZ"],
-		maxZ = Config.Locations["CoffeeMachine"]["maxZ"],
+		minZ = Config.Sted["CoffeeMachine"]["minZ"],
+		maxZ = Config.Sted["CoffeeMachine"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:MainCoffeeMenu",
+				event = "Gustav-Pizzeria:MainCoffeeMenu",
 				icon = Config.Locals['Targets']['CoffeeMachine']['Icon'],
 				label = Config.Locals['Targets']['CoffeeMachine']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.5,
 	})
 
-	exports[Config.Target]:AddBoxZone("DrinksMaker", vector3(Config.Locations["DrinksMaker"]["Coords"].x, Config.Locations["DrinksMaker"]["Coords"].y, Config.Locations["DrinksMaker"]["Coords"].z), 0.5, 0.7, {
+	exports[Config.Target]:AddBoxZone("DrinksMaker", vector3(Config.Sted["DrinksMaker"]["Coords"].x, Config.Sted["DrinksMaker"]["Coords"].y, Config.Sted["DrinksMaker"]["Coords"].z), 0.5, 0.7, {
 		name = "DrinksMaker",
-		heading = Config.Locations["DrinksMaker"]["Heading"],
+		heading = Config.Sted["DrinksMaker"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["DrinksMaker"]["minZ"],
-		maxZ = Config.Locations["DrinksMaker"]["maxZ"],
+		minZ = Config.Sted["DrinksMaker"]["minZ"],
+		maxZ = Config.Sted["DrinksMaker"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:DrinksMakerMenu",
+				event = "Gustav-Pizzeria:DrinksMakerMenu",
 				icon = Config.Locals['Targets']['DrinksMaker']['Icon'],
 				label = Config.Locals['Targets']['DrinksMaker']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.5,
 	})
 
-	for k, v in pairs(Config.Locations["Trays"]) do
+	for k, v in pairs(Config.Sted["Trays"]) do
         exports[Config.Target]:AddBoxZone("Tray"..k, vector3(v.coords.x, v.coords.y, v.coords.z), v.poly1, v.poly2, {
             name = "Tray"..k,
             heading = v.heading,
@@ -971,119 +935,117 @@ Citizen.CreateThread(function()
         })
     end
 
-	exports[Config.Target]:AddBoxZone("MakePizza", vector3(Config.Locations["MakePizza"]["Coords"].x, Config.Locations["MakePizza"]["Coords"].y, Config.Locations["MakePizza"]["Coords"].z), 0.4, 0.4, {
+	exports[Config.Target]:AddBoxZone("MakePizza", vector3(Config.Sted["MakePizza"]["Coords"].x, Config.Sted["MakePizza"]["Coords"].y, Config.Sted["MakePizza"]["Coords"].z), 0.4, 0.4, {
 		name = "MakePizza",
-		heading = Config.Locations["MakePizza"]["Heading"],
+		heading = Config.Sted["MakePizza"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["MakePizza"]["minZ"],
-		maxZ = Config.Locations["MakePizza"]["maxZ"],
+		minZ = Config.Sted["MakePizza"]["minZ"],
+		maxZ = Config.Sted["MakePizza"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:MakePizzaMenu",
+				event = "Gustav-Pizzeria:MakePizzaMenu",
 				icon = Config.Locals['Targets']['MakePizza']['Icon'],
 				label = Config.Locals['Targets']['MakePizza']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("MakePasta", vector3(Config.Locations["MakePasta"]["Coords"].x, Config.Locations["MakePasta"]["Coords"].y, Config.Locations["MakePasta"]["Coords"].z), 0.6, 0.7, {
+	exports[Config.Target]:AddBoxZone("MakePasta", vector3(Config.Sted["MakePasta"]["Coords"].x, Config.Sted["MakePasta"]["Coords"].y, Config.Sted["MakePasta"]["Coords"].z), 0.6, 0.7, {
 		name = "MakePasta",
-		heading = Config.Locations["MakePasta"]["Heading"],
+		heading = Config.Sted["MakePasta"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["MakePasta"]["minZ"],
-		maxZ = Config.Locations["MakePasta"]["maxZ"],
+		minZ = Config.Sted["MakePasta"]["minZ"],
+		maxZ = Config.Sted["MakePasta"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:PastasMenu",
+				event = "Gustav-Pizzeria:PastasMenu",
 				icon = Config.Locals['Targets']['MakePasta']['Icon'],
 				label = Config.Locals['Targets']['MakePasta']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("PizzaOven", vector3(Config.Locations["PizzaOven"]["Coords"].x, Config.Locations["PizzaOven"]["Coords"].y, Config.Locations["PizzaOven"]["Coords"].z), 0.6, 1.7, {
+	exports[Config.Target]:AddBoxZone("PizzaOven", vector3(Config.Sted["PizzaOven"]["Coords"].x, Config.Sted["PizzaOven"]["Coords"].y, Config.Sted["PizzaOven"]["Coords"].z), 0.6, 1.7, {
 		name = "PizzaOven",
-		heading = Config.Locations["PizzaOven"]["Heading"],
+		heading = Config.Sted["PizzaOven"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["PizzaOven"]["minZ"],
-		maxZ = Config.Locations["PizzaOven"]["maxZ"],
+		minZ = Config.Sted["PizzaOven"]["minZ"],
+		maxZ = Config.Sted["PizzaOven"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:CookPizzaMenu",
+				event = "Gustav-Pizzeria:CookPizzaMenu",
 				icon = Config.Locals['Targets']['PizzaOven']['Icon'],
 				label = Config.Locals['Targets']['PizzaOven']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("Dessert", vector3(Config.Locations["Dessert"]["Coords"].x, Config.Locations["Dessert"]["Coords"].y, Config.Locations["Dessert"]["Coords"].z), 0.6, 1.7, {
+	exports[Config.Target]:AddBoxZone("Dessert", vector3(Config.Sted["Dessert"]["Coords"].x, Config.Sted["Dessert"]["Coords"].y, Config.Sted["Dessert"]["Coords"].z), 0.6, 1.7, {
 		name = "Dessert",
-		heading = Config.Locations["Dessert"]["Heading"],
+		heading = Config.Sted["Dessert"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["Dessert"]["minZ"],
-		maxZ = Config.Locations["Dessert"]["maxZ"],
+		minZ = Config.Sted["Dessert"]["minZ"],
+		maxZ = Config.Sted["Dessert"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:MakeDessertMenu",
+				event = "Gustav-Pizzeria:MakeDessertMenu",
 				icon = Config.Locals['Targets']['Dessert']['Icon'],
 				label = Config.Locals['Targets']['Dessert']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 
-	exports[Config.Target]:AddBoxZone("PizzaAddons", vector3(Config.Locations["PizzaAddons"]["Coords"].x, Config.Locations["PizzaAddons"]["Coords"].y, Config.Locations["PizzaAddons"]["Coords"].z), 0.6, 0.9, {
+	exports[Config.Target]:AddBoxZone("PizzaAddons", vector3(Config.Sted["PizzaAddons"]["Coords"].x, Config.Sted["PizzaAddons"]["Coords"].y, Config.Sted["PizzaAddons"]["Coords"].z), 0.6, 0.9, {
 		name = "PizzaAddons",
-		heading = Config.Locations["PizzaAddons"]["Heading"],
+		heading = Config.Sted["PizzaAddons"]["Heading"],
 		debugPoly = Config.PolyZone,
-		minZ = Config.Locations["PizzaAddons"]["minZ"],
-		maxZ = Config.Locations["PizzaAddons"]["maxZ"],
+		minZ = Config.Sted["PizzaAddons"]["minZ"],
+		maxZ = Config.Sted["PizzaAddons"]["maxZ"],
 	}, {
 		options = { 
 			{
 				type = "client",
-				event = "CL-Pizzeria:OpenAddonsShop",
+				event = "Gustav-Pizzeria:OpenAddonsShop",
 				icon = Config.Locals['Targets']['PizzaAddons']['Icon'],
 				label = Config.Locals['Targets']['PizzaAddons']['Label'],
-				job = Config.Job,
+				job = Config.Arbejde,
 			},
 		},
 		distance = 1.2,
 	})
 end)
 
-----------------
-----Menus
-----------------
-RegisterNetEvent('CL-Pizzeria:Garage:Menu', function()
+
+RegisterNetEvent('Gustav-Pizzeria:Garage:Menu', function()
 	local GarageMenu = {
 		{
 			header = Config.Locals["Menus"]["Garage"]["MainMenu"]["MainHeader"],
 			txt = Config.Locals["Menus"]["Garage"]["MainMenu"]["Text"],
 			params = {
-				event = "CL-Pizzeria:Catalog",
+				event = "Gustav-Pizzeria:Catalog",
 			}
 		}
 	}
 	GarageMenu[#GarageMenu+1] = {
 		header = Config.Locals["Menus"]["Garage"]["MainMenu"]["StoreVehicleHeader"],
 		params = {
-			event = "CL-Pizzeria:StoreVehicle"
+			event = "Gustav-Pizzeria:StoreVehicle"
 		}
 	}
 	GarageMenu[#GarageMenu+1] = {
@@ -1095,20 +1057,20 @@ RegisterNetEvent('CL-Pizzeria:Garage:Menu', function()
 	exports['qb-menu']:openMenu(GarageMenu)
 end)
 
-RegisterNetEvent("CL-Pizzeria:Catalog", function()
+RegisterNetEvent("Gustav-Pizzeria:Catalog", function()
     local VehicleMenu = {
         {
             header = Config.Locals["Menus"]["Garage"]["CatalogMenu"]["MainHeader"],
             isMenuHeader = true,
         }
     }
-    for k, v in pairs(Config.Vehicles) do
+    for k, v in pairs(Config.Koertoerjer) do
         VehicleMenu[#VehicleMenu+1] = {
             header = v.vehiclename,
             txt = "Rent: " .. v.vehiclename .. " For: " .. v.price .. "$",
             params = {
                 isServer = true,
-                event = "CL-Pizzeria:TakeMoney",
+                event = "Gustav-Pizzeria:TakeMoney",
                 args = {
                     price = v.price,
                     vehiclename = v.vehiclename,
@@ -1120,13 +1082,13 @@ RegisterNetEvent("CL-Pizzeria:Catalog", function()
     VehicleMenu[#VehicleMenu+1] = {
         header = Config.Locals["Menus"]["Garage"]["CatalogMenu"]["GoBackHeader"],
         params = {
-            event = "CL-Pizzeria:Garage:Menu"
+            event = "Gustav-Pizzeria:Garage:Menu"
         }
     }
     exports['qb-menu']:openMenu(VehicleMenu)
 end)
 
-RegisterNetEvent("CL-Pizzeria:DutyMenu", function()
+RegisterNetEvent("Gustav-Pizzeria:DutyMenu", function()
     local DutyMenu = {
         {
             header = Config.Locals["Menus"]["Duty"]["MainHeader"],
@@ -1150,8 +1112,8 @@ RegisterNetEvent("CL-Pizzeria:DutyMenu", function()
     exports['qb-menu']:openMenu(DutyMenu)
 end)
 
-RegisterNetEvent("CL-Pizzeria:GlassesMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:GlassesMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local GlassesMenu = {
 				{
@@ -1159,13 +1121,13 @@ RegisterNetEvent("CL-Pizzeria:GlassesMenu", function()
 					isMenuHeader = true,
 				}
 			}
-			for k, v in pairs(Config.Items["Glasses"]) do
+			for k, v in pairs(Config.Ting["Glasses"]) do
 				GlassesMenu[#GlassesMenu+1] = {
 					header = v.image.." ┇ " ..v.glassname,
 					txt = "Buy " .. v.glassname .. " For: " .. v.price .. "$",
 					params = {
 						isServer = true,
-						event = "CL-Pizzeria:BuyGlass",
+						event = "Gustav-Pizzeria:BuyGlass",
 						args = {
 							price = v.price,
 							glassname = v.glassname,
@@ -1187,8 +1149,8 @@ RegisterNetEvent("CL-Pizzeria:GlassesMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:DrinksMachineMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:DrinksMachineMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local DrinksMenu = {
 				{
@@ -1196,12 +1158,12 @@ RegisterNetEvent("CL-Pizzeria:DrinksMachineMenu", function()
 					isMenuHeader = true,
 				}
 			}
-            for k, v in pairs(Config.Items["Drinks"]) do
+            for k, v in pairs(Config.Ting["Drinks"]) do
                 DrinksMenu[#DrinksMenu+1] = {
                     header = v.image.." ┇ " ..v.drinkname,
                     txt = "Pour " .. v.drinkname .. "</br> Needed Glass: " .. v.glassname,
                     params = {
-                        event = "CL-Pizzeria:MakeDrink",
+                        event = "Gustav-Pizzeria:MakeDrink",
                         args = {
                             glassname = v.glassname,
                             glass = v.glass,
@@ -1224,8 +1186,8 @@ RegisterNetEvent("CL-Pizzeria:DrinksMachineMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:GrabDrinksMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:GrabDrinksMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local GrabDrinks = {
 				{
@@ -1233,12 +1195,12 @@ RegisterNetEvent("CL-Pizzeria:GrabDrinksMenu", function()
 					isMenuHeader = true,
 				}
 			}
-			for k, v in pairs(Config.Items["GrabDrinks"]) do
+			for k, v in pairs(Config.Ting["GrabDrinks"]) do
 				GrabDrinks[#GrabDrinks+1] = {
 					header = v.image.." ┇ " ..v.drinkname,
 					txt = "Grab " .. v.drinkname,
 					params = {
-						event = "CL-Pizzeria:Grab",
+						event = "Gustav-Pizzeria:Grab",
 						args = {
 							gdrinkname = v.drinkname,
 							gdrink = v.drink,
@@ -1262,8 +1224,8 @@ RegisterNetEvent("CL-Pizzeria:GrabDrinksMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:GrabBossDrinksMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:GrabBossDrinksMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local BossGrabDrinksMenu = {
 				{
@@ -1271,12 +1233,12 @@ RegisterNetEvent("CL-Pizzeria:GrabBossDrinksMenu", function()
 					isMenuHeader = true,
 				}
 			}
-			for k, v in pairs(Config.Items["GrabBossDrinks"]) do
+			for k, v in pairs(Config.Ting["GrabBossDrinks"]) do
 				BossGrabDrinksMenu[#BossGrabDrinksMenu+1] = {
 					header = v.image.." ┇ " ..v.drinkname,
 					txt = "Grab " .. v.drinkname,
 					params = {
-						event = "CL-Pizzeria:Grab",
+						event = "Gustav-Pizzeria:Grab",
 						args = {
 							gdrinkname = v.drinkname,
 							gdrink = v.drink,
@@ -1300,88 +1262,8 @@ RegisterNetEvent("CL-Pizzeria:GrabBossDrinksMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:FruitsMenu", function()
-    local FruitsMenu = {
-        {
-            header = Config.Locals["Menus"]["Fruits"]["MainHeader"],
-            isMenuHeader = true,
-        }
-    }
-	for k, v in pairs(Config.Items["Fruits"]) do
-		FruitsMenu[#FruitsMenu+1] = {
-			header = v.image.." ┇ " ..v.fruitname,
-			txt = "Grab " .. v.fruitname,
-			params = {
-				event = "CL-Pizzeria:Grab",
-				args = {
-					gdrinkname = v.fruitname,
-					gdrink = v.fruit,
-					animationdict = "anim@amb@clubhouse@bar@drink@one",
-					animation = "one_player",
-					time = 4500,
-				}
-			}
-		}
-	end
-    FruitsMenu[#FruitsMenu+1] = {
-        header = Config.Locals["Menus"]["Fruits"]["CloseMenuHeader"],
-        params = {
-            event = "qb-menu:client:closemenu"
-        }
-    }
-    exports['qb-menu']:openMenu(FruitsMenu)
-end)
-
-RegisterNetEvent("CL-Pizzeria:DoughMenu", function()
-    local DoughMenu = {
-        {
-            header = Config.Locals["Menus"]["Dough"]["MainHeader"],
-            isMenuHeader = true,
-        }
-    }
-	if dough >= 1 then
-		DoughMenu[#DoughMenu+1] = {
-			header = Config.Locals["Menus"]["Dough"]["SecondHeader"],
-			txt = "Current Available Dough: "..dough,
-			params = {
-				event = "CL-Pizzeria:Grab",
-				args = {
-					gdrinkname = "Dough",
-					gdrink = "pdough",
-					animationdict = "anim@amb@clubhouse@bar@drink@one",
-					animation = "one_player",
-					time = 4700,
-					dough = true,
-				}
-			}
-		}
-		DoughMenu[#DoughMenu+1] = {
-			header = Config.Locals["Menus"]["Dough"]["ThirdHeader"],
-			txt = Config.Locals["Menus"]["Dough"]["ThirdText"],
-			params = {
-				event = "CL-Pizzeria:AddDough"
-			}
-		}
-	else
-		DoughMenu[#DoughMenu+1] = {
-			header = Config.Locals["Menus"]["Dough"]["FourthHeader"],
-			txt = Config.Locals["Menus"]["Dough"]["FourthText"],
-			params = {
-				event = "CL-Pizzeria:AddDough",
-			}
-		}
-	end
-    DoughMenu[#DoughMenu+1] = {
-        header = Config.Locals["Menus"]["Dough"]["CloseMenuHeader"],
-        params = {
-            event = "qb-menu:client:closemenu"
-        }
-    }
-    exports['qb-menu']:openMenu(DoughMenu)
-end)
-
-RegisterNetEvent("CL-Pizzeria:WineRackMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:WineRackMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local WineRack = {
 				{
@@ -1389,12 +1271,12 @@ RegisterNetEvent("CL-Pizzeria:WineRackMenu", function()
 					isMenuHeader = true,
 				}
 			}
-			for k, v in pairs(Config.Items["WineRack"]) do
+			for k, v in pairs(Config.Ting["WineRack"]) do
 				WineRack[#WineRack+1] = {
 					header = v.image.." ┇ " ..v.winename,
 					txt = "Grab " .. v.winename,
 					params = {
-						event = "CL-Pizzeria:Grab",
+						event = "Gustav-Pizzeria:Grab",
 						args = {
 							gdrinkname = v.winename,
 							gdrink = v.wine,
@@ -1418,8 +1300,88 @@ RegisterNetEvent("CL-Pizzeria:WineRackMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:OpenDoughMachineMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:FruitsMenu", function()
+    local FruitsMenu = {
+        {
+            header = Config.Locals["Menus"]["Fruits"]["MainHeader"],
+            isMenuHeader = true,
+        }
+    }
+	for k, v in pairs(Config.Ting["Fruits"]) do
+		FruitsMenu[#FruitsMenu+1] = {
+			header = v.image.." ┇ " ..v.fruitname,
+			txt = "Grab " .. v.fruitname,
+			params = {
+				event = "Gustav-Pizzeria:Grab",
+				args = {
+					gdrinkname = v.fruitname,
+					gdrink = v.fruit,
+					animationdict = "anim@amb@clubhouse@bar@drink@one",
+					animation = "one_player",
+					time = 4500,
+				}
+			}
+		}
+	end
+    FruitsMenu[#FruitsMenu+1] = {
+        header = Config.Locals["Menus"]["Fruits"]["CloseMenuHeader"],
+        params = {
+            event = "qb-menu:client:closemenu"
+        }
+    }
+    exports['qb-menu']:openMenu(FruitsMenu)
+end)
+
+RegisterNetEvent("Gustav-Pizzeria:DoughMenu", function()
+    local DoughMenu = {
+        {
+            header = Config.Locals["Menus"]["Dough"]["MainHeader"],
+            isMenuHeader = true,
+        }
+    }
+	if dough >= 1 then
+		DoughMenu[#DoughMenu+1] = {
+			header = Config.Locals["Menus"]["Dough"]["SecondHeader"],
+			txt = "Current Available Dough: "..dough,
+			params = {
+				event = "Gustav-Pizzeria:Grab",
+				args = {
+					gdrinkname = "Dough",
+					gdrink = "pdough",
+					animationdict = "anim@amb@clubhouse@bar@drink@one",
+					animation = "one_player",
+					time = 4700,
+					dough = true,
+				}
+			}
+		}
+		DoughMenu[#DoughMenu+1] = {
+			header = Config.Locals["Menus"]["Dough"]["ThirdHeader"],
+			txt = Config.Locals["Menus"]["Dough"]["ThirdText"],
+			params = {
+				event = "Gustav-Pizzeria:AddDough"
+			}
+		}
+	else
+		DoughMenu[#DoughMenu+1] = {
+			header = Config.Locals["Menus"]["Dough"]["FourthHeader"],
+			txt = Config.Locals["Menus"]["Dough"]["FourthText"],
+			params = {
+				event = "Gustav-Pizzeria:AddDough",
+			}
+		}
+	end
+    DoughMenu[#DoughMenu+1] = {
+        header = Config.Locals["Menus"]["Dough"]["CloseMenuHeader"],
+        params = {
+            event = "qb-menu:client:closemenu"
+        }
+    }
+    exports['qb-menu']:openMenu(DoughMenu)
+end)
+
+RegisterNetEvent("Gustav-Pizzeria:OpenDoughMachineMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local DoughMachineMenu = {
 				{
@@ -1431,7 +1393,7 @@ RegisterNetEvent("CL-Pizzeria:OpenDoughMachineMenu", function()
 				header =  "<img src=https://cdn.discordapp.com/attachments/967914093396774942/978962983516508170/pbigdough.png width=30px> ".." ┇ Pizza Dough",
 				txt = "Ingredients: <br> - Pizza Flour <br> - Water <br> - Salt <br> - Oil",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "PizzaDough",
 						time = 5000,
@@ -1460,8 +1422,8 @@ RegisterNetEvent("CL-Pizzeria:OpenDoughMachineMenu", function()
 	end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:OpenPrepareDoughMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:OpenPrepareDoughMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local PrepareDoughMenu = {
 				{
@@ -1473,7 +1435,7 @@ RegisterNetEvent("CL-Pizzeria:OpenPrepareDoughMenu", function()
 				header =  "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979013867856338955/pdough.png width=30px> ".." ┇  Ready Pizza Dough",
 				txt = "Ingredients: <br> - Pizza Dough",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						qbcoreevent = true,
 						qbcoreitem = "pbigdough",
@@ -1500,8 +1462,8 @@ RegisterNetEvent("CL-Pizzeria:OpenPrepareDoughMenu", function()
 	end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:CoffeeCupsMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:CoffeeCupsMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local CoffeeCupsMenu = {
 				{
@@ -1509,13 +1471,13 @@ RegisterNetEvent("CL-Pizzeria:CoffeeCupsMenu", function()
 					isMenuHeader = true,
 				}
 			}
-			for k, v in pairs(Config.Items["CoffeeCups"]) do
+			for k, v in pairs(Config.Ting["CoffeeCups"]) do
 				CoffeeCupsMenu[#CoffeeCupsMenu+1] = {
 					header = v.image.." ┇ " ..v.glassname,
 					txt = "Buy " .. v.glassname .. " For: " .. v.price .. "$",
 					params = {
 						isServer = true,
-						event = "CL-Pizzeria:BuyGlass",
+						event = "Gustav-Pizzeria:BuyGlass",
 						args = {
 							price = v.price,
 							glassname = v.glassname,
@@ -1537,108 +1499,8 @@ RegisterNetEvent("CL-Pizzeria:CoffeeCupsMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:MainCoffeeMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
-        if result then
-			local MainCoffeeMenu = {
-				{
-					header = "Coffee's",
-					isMenuHeader = true,
-				}
-			}
-			MainCoffeeMenu[#MainCoffeeMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963446697059553351/unknown.png width=30px> ".." ┇ Espresso Macchiato",
-				txt = "Ingredients: <br> - Espresso Coffee Glass <br> - Milk <br> - Coffee Beans",
-				params = {
-					event = "CL-Pizzeria:Make",
-					args = {
-						eventname = "EspressoMacchiato",
-						number = 2,
-						time = 5000,
-						item2 = "pmilk",
-						item3 = "pcoffeebeans",
-						item4 = "pespressocoffeecup",	
-						itemname = "Espresso Macchiato",
-						recieveitem = "pespressomacchiato",
-						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
-						anim = "two_player",
-					}            
-				}
-			}
-			MainCoffeeMenu[#MainCoffeeMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/930069494066475008/945394895328268419/caremel_frappucino.png width=30px> ".." ┇ Caramel Frappucino",
-				txt = "Ingredients: <br> - High Coffee Glass <br> - Milk <br> - Coffee Beans <br> - Whipped Cream <br> - Caramel Syrup",
-				params = {
-					event = "CL-Pizzeria:Make",
-					args = {
-						eventname = "CaramelFrappucino",
-						number = 2,
-						time = 5000,
-						item2 = "pmilk",
-						item3 = "pcoffeebeans",
-						item4 = "pcream",
-						item5 = "pcaramelsyrup",
-						item6 = "phighcoffeeglasscup",	
-						itemname = "Caramel Frappucino",
-						recieveitem = "pcaramelfrappucino",
-						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
-						anim = "two_player",
-					}        
-				}
-			}
-			MainCoffeeMenu[#MainCoffeeMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/930069494066475008/945394893474398238/cold_brew_latte.png width=30px> ".." ┇ Cold Brew Latte",
-				txt = "Ingredients: <br> - High Coffee Glass <br> - Milk <br> - Coffee Beans",
-				params = {
-					event = "CL-Pizzeria:Make",
-					args = {
-						eventname = "ColdBrewLatte",
-						number = 2,
-						time = 5000,
-						item2 = "pmilk",
-						item3 = "pcoffeebeans",
-						item4 = "phighcoffeeglasscup",	
-						itemname = "Cold Brew Latte",
-						recieveitem = "pcoldbrewlatte",
-						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
-						anim = "two_player",
-					}           
-				}
-			}
-			MainCoffeeMenu[#MainCoffeeMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/930069494066475008/945394940282798201/strawberry_vanilla_oat_latte.png width=30px> ".." ┇ Strawberry Vanilla Oat Latte",
-				txt = "Ingredients: <br> - Coffee Glass <br> - Milk <br> - Coffee Beans",
-				params = {
-					event = "CL-Pizzeria:Make",
-					args = {
-						eventname = "StrawberryVanillaOatLatte",
-						number = 2,
-						time = 5000,
-						item2 = "pmilk",
-						item3 = "pcoffeebeans",
-						item4 = "pcoffeeglass",	
-						itemname = "Strawberry Vanilla Oat Latte",
-						recieveitem = "pstrawberryvanillaoatlatte",
-						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
-						anim = "two_player",
-					}           
-				}
-			}
-			MainCoffeeMenu[#MainCoffeeMenu+1] = {
-				header = "⬅ Close",
-				params = {
-					event = "qb-menu:client:closemenu",
-				}
-			}
-			exports['qb-menu']:openMenu(MainCoffeeMenu)
-		else
-            QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
-        end
-    end)
-end)
-
-RegisterNetEvent("CL-Pizzeria:DrinksMakerMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:DrinksMakerMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local DrinksMakerMenu = {
 				{
@@ -1646,12 +1508,12 @@ RegisterNetEvent("CL-Pizzeria:DrinksMakerMenu", function()
 					isMenuHeader = true,
 				}
 			}
-			for k, v in pairs(Config.Items["DrinksMaker"]) do
+			for k, v in pairs(Config.Ting["DrinksMaker"]) do
 				DrinksMakerMenu[#DrinksMakerMenu+1] = {
 					header = v.image.." ┇ " ..v.drinkname,
 					txt = "Grab " .. v.drinkname,
 					params = {
-						event = "CL-Pizzeria:Grab",
+						event = "Gustav-Pizzeria:Grab",
 						args = {
 							gdrinkname = v.drinkname,
 							gdrink = v.drink,
@@ -1675,8 +1537,8 @@ RegisterNetEvent("CL-Pizzeria:DrinksMakerMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:MakePizzaMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:MakePizzaMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local MakePizzaMenu = {
 				{
@@ -1688,7 +1550,7 @@ RegisterNetEvent("CL-Pizzeria:MakePizzaMenu", function()
 				header =  "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979143892106629170/ppizzabase.png width=30px> ".." ┇ Pizza Base",
 				txt = "Ingredients: <br> - Pizza Dough <br> - Pizza Flour <br> - Tomato Souce",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "PizzaBase",
 						time = 7000,
@@ -1716,8 +1578,171 @@ RegisterNetEvent("CL-Pizzeria:MakePizzaMenu", function()
 	end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:MainCoffeeMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
+        if result then
+			local MainCoffeeMenu = {
+				{
+					header = "Coffee's",
+					isMenuHeader = true,
+				}
+			}
+			MainCoffeeMenu[#MainCoffeeMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/926465631770005514/963446697059553351/unknown.png width=30px> ".." ┇ Espresso Macchiato",
+				txt = "Ingredients: <br> - Espresso Coffee Glass <br> - Milk <br> - Coffee Beans",
+				params = {
+					event = "Gustav-Pizzeria:Make",
+					args = {
+						eventname = "EspressoMacchiato",
+						number = 2,
+						time = 5000,
+						item2 = "pmilk",
+						item3 = "pcoffeebeans",
+						item4 = "pespressocoffeecup",	
+						itemname = "Espresso Macchiato",
+						recieveitem = "pespressomacchiato",
+						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
+						anim = "two_player",
+					}            
+				}
+			}
+			MainCoffeeMenu[#MainCoffeeMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/930069494066475008/945394895328268419/caremel_frappucino.png width=30px> ".." ┇ Caramel Frappucino",
+				txt = "Ingredients: <br> - High Coffee Glass <br> - Milk <br> - Coffee Beans <br> - Whipped Cream <br> - Caramel Syrup",
+				params = {
+					event = "Gustav-Pizzeria:Make",
+					args = {
+						eventname = "CaramelFrappucino",
+						number = 2,
+						time = 5000,
+						item2 = "pmilk",
+						item3 = "pcoffeebeans",
+						item4 = "pcream",
+						item5 = "pcaramelsyrup",
+						item6 = "phighcoffeeglasscup",	
+						itemname = "Caramel Frappucino",
+						recieveitem = "pcaramelfrappucino",
+						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
+						anim = "two_player",
+					}        
+				}
+			}
+			MainCoffeeMenu[#MainCoffeeMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/930069494066475008/945394893474398238/cold_brew_latte.png width=30px> ".." ┇ Cold Brew Latte",
+				txt = "Ingredients: <br> - High Coffee Glass <br> - Milk <br> - Coffee Beans",
+				params = {
+					event = "Gustav-Pizzeria:Make",
+					args = {
+						eventname = "ColdBrewLatte",
+						number = 2,
+						time = 5000,
+						item2 = "pmilk",
+						item3 = "pcoffeebeans",
+						item4 = "phighcoffeeglasscup",	
+						itemname = "Cold Brew Latte",
+						recieveitem = "pcoldbrewlatte",
+						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
+						anim = "two_player",
+					}           
+				}
+			}
+			MainCoffeeMenu[#MainCoffeeMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/930069494066475008/945394940282798201/strawberry_vanilla_oat_latte.png width=30px> ".." ┇ Strawberry Vanilla Oat Latte",
+				txt = "Ingredients: <br> - Coffee Glass <br> - Milk <br> - Coffee Beans",
+				params = {
+					event = "Gustav-Pizzeria:Make",
+					args = {
+						eventname = "StrawberryVanillaOatLatte",
+						number = 2,
+						time = 5000,
+						item2 = "pmilk",
+						item3 = "pcoffeebeans",
+						item4 = "pcoffeeglass",	
+						itemname = "Strawberry Vanilla Oat Latte",
+						recieveitem = "pstrawberryvanillaoatlatte",
+						animdict = "anim@amb@nightclub@mini@drinking@bar@player_bartender@two",
+						anim = "two_player",
+					}           
+				}
+			}
+			MainCoffeeMenu[#MainCoffeeMenu+1] = {
+				header = "⬅ Close",
+				params = {
+					event = "qb-menu:client:closemenu",
+				}
+			}
+			exports['qb-menu']:openMenu(MainCoffeeMenu)
+		else
+            QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
+        end
+    end)
+end)
+
+RegisterNetEvent("Gustav-Pizzeria:MakeDessertMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
+        if result then
+			local MakeDessertMenu = {
+				{
+					header = Config.Locals["Menus"]["Dessert"]["MainHeader"],
+					isMenuHeader = true,
+				}
+			}
+			MakeDessertMenu[#MakeDessertMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979152201584881704/pmargharita.png width=30px> ".." ┇ Cook Margharita Pizza",
+				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Olive Oil <br> - Salt",
+				params = {
+					event = "Gustav-Pizzeria:Make",
+					args = {
+						eventname = "MargharitaPizza",
+						number = 1,
+						time = 8000,
+						item2 = "pbasil",
+						item3 = "pmozzarella",
+						item4 = "poil",	
+						item5 = "psalt",
+						item6 = "ppizzabase",
+						itemname = "Margharita Pizza",
+						recieveitem = "pmargharita",
+						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
+						anim = "base_lazycook",
+					}            
+				}
+			}
+			MakeDessertMenu[#MakeDessertMenu+1] = {
+				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979340823177093140/pnapollitano.png width=30px> ".." ┇ Cook Napollitano Pizza",
+				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Salt",
+				params = {
+					event = "Gustav-Pizzeria:Make",
+					args = {
+						eventname = "NapollitanoPizza",
+						number = 1,
+						time = 8000,
+						item2 = "pbasil",
+						item3 = "pmozzarella",
+						item4 = "psalt",
+						item5 = "ppizzabase",
+						itemname = "Napollitano Pizza",
+						recieveitem = "pnapollitano",
+						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
+						anim = "base_lazycook",
+					}            
+				}
+			}
+			MakeDessertMenu[#MakeDessertMenu+1] = {
+				header = Config.Locals["Menus"]["Dessert"]["CloseMenuHeader"],
+				params = {
+					event = "qb-menu:client:closemenu",
+				}
+			}
+			exports['qb-menu']:openMenu(MakeDessertMenu)
+		else
+            QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
+        end
+    end)
+end)
+
+RegisterNetEvent("Gustav-Pizzeria:CookPizzaMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local CookPizzaMenu = {
 				{
@@ -1729,7 +1754,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979152201584881704/pmargharita.png width=30px> ".." ┇ Cook Margharita Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Olive Oil <br> - Salt",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "MargharitaPizza",
 						number = 1,
@@ -1750,7 +1775,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979340823177093140/pnapollitano.png width=30px> ".." ┇ Cook Napollitano Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Salt",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "NapollitanoPizza",
 						number = 1,
@@ -1770,7 +1795,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979344270425198612/pmushroomspizza.png width=30px> ".." ┇ Cook Fungi Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Butter <br> - Mozzarella <br> - Olive Oil <br> - Mushrooms",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "MushroomsPizza",
 						number = 1,
@@ -1791,7 +1816,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979349165568041020/pseafood.png width=30px> ".." ┇ Cook Seafood Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Seafood Mix <br> - Mozzarella <br> - Basil <br> - Salt",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "SeafoodPizza",
 						number = 1,
@@ -1812,7 +1837,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979373569358319616/pvegpizza.png width=30px> ".." ┇ Cook Vegetarian Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Tomatoes <br> - Vegetarian Cheese <br> - Basil <br> - Salt",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "VegetarianPizza",
 						number = 1,
@@ -1833,7 +1858,7 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979373569358319616/pvegpizza.png width=30px> ".." ┇ Cook Bjørnholdt Ananas Pizza",
 				txt = "Ingredients: <br> - Pizza Base <br> - Tomatoes <br> - Vegetarian Cheese <br> - Basil <br> - Salt <br> - Ananas",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "Bjoenholdt",
 						number = 1,
@@ -1864,71 +1889,8 @@ RegisterNetEvent("CL-Pizzeria:CookPizzaMenu", function()
     end)
 end)
 
-RegisterNetEvent("CL-Pizzeria:MakeDessertMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
-        if result then
-			local MakeDessertMenu = {
-				{
-					header = Config.Locals["Menus"]["Dessert"]["MainHeader"],
-					isMenuHeader = true,
-				}
-			}
-			MakeDessertMenu[#MakeDessertMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979152201584881704/pmargharita.png width=30px> ".." ┇ Cook Margharita Pizza",
-				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Olive Oil <br> - Salt",
-				params = {
-					event = "CL-Pizzeria:Make",
-					args = {
-						eventname = "MargharitaPizza",
-						number = 1,
-						time = 8000,
-						item2 = "pbasil",
-						item3 = "pmozzarella",
-						item4 = "poil",	
-						item5 = "psalt",
-						item6 = "ppizzabase",
-						itemname = "Margharita Pizza",
-						recieveitem = "pmargharita",
-						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
-						anim = "base_lazycook",
-					}            
-				}
-			}
-			MakeDessertMenu[#MakeDessertMenu+1] = {
-				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979340823177093140/pnapollitano.png width=30px> ".." ┇ Cook Napollitano Pizza",
-				txt = "Ingredients: <br> - Pizza Base <br> - Basil <br> - Mozzarella <br> - Salt",
-				params = {
-					event = "CL-Pizzeria:Make",
-					args = {
-						eventname = "NapollitanoPizza",
-						number = 1,
-						time = 8000,
-						item2 = "pbasil",
-						item3 = "pmozzarella",
-						item4 = "psalt",
-						item5 = "ppizzabase",
-						itemname = "Napollitano Pizza",
-						recieveitem = "pnapollitano",
-						animdict = "anim@amb@business@meth@meth_monitoring_no_work@",
-						anim = "base_lazycook",
-					}            
-				}
-			}
-			MakeDessertMenu[#MakeDessertMenu+1] = {
-				header = Config.Locals["Menus"]["Dessert"]["CloseMenuHeader"],
-				params = {
-					event = "qb-menu:client:closemenu",
-				}
-			}
-			exports['qb-menu']:openMenu(MakeDessertMenu)
-		else
-            QBCore.Functions.Notify(Config.Locals["Notifications"]["MustBeOnDuty"], "error")
-        end
-    end)
-end)
-
-RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
-	QBCore.Functions.TriggerCallback('CL-Pizzeria:CheckDuty', function(result)
+RegisterNetEvent("Gustav-Pizzeria:PastasMenu", function()
+	QBCore.Functions.TriggerCallback('Gustav-Pizzeria:CheckDuty', function(result)
         if result then
 			local PastasMenu = {
 				{
@@ -1940,7 +1902,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979434168859631686/pmacncheese.png width=30px> ".." ┇ Cook Mac N Cheese",
 				txt = "Ingredients: <br> - Elbow Macaroni <br> - Butter <br> - Milk <br> - Cheddar Cheese <br> - Parmesan Cheese",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "MacNCheese",
 						number = 1,
@@ -1961,7 +1923,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979436658132918372/pbbqporkmac.png width=30px> ".." ┇ Cook BBQ Pork Mac",
 				txt = "Ingredients: <br> - Pork Meat <br> - Elbow Macaroni <br> - Milk <br> - Cheddar Cheese <br> - BBQ Souce",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "BBQPorkMac",
 						number = 1,
@@ -1982,7 +1944,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/967914093396774942/979439685174710392/pfresca.png width=30px> ".." ┇ Cook Pasta Fresca",
 				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomatoes <br> - Seafood Mix",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "PastaFresca",
 						number = 1,
@@ -2002,7 +1964,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/1108467372551061665/1116054682905874503/pcarbonara.png width=30px> ".." ┇ Cook Pasta Carbonara",
 				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomatoes <br> - Parmesan Cheese <br> - Bacon",
 				params = {
-					event = "CL-Pizzeria:Make", 
+					event = "Gustav-Pizzeria:Make", 
 					args = {
 						eventname = "PastaCarbonara",
 						number = 1,
@@ -2023,7 +1985,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/1108467372551061665/1116053994398285854/marinara.png width=30px> ".." ┇ Cook Pasta Marinara",
 				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomato Souce",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "PastaMarinara",
 						number = 1,
@@ -2042,7 +2004,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
 				header = "<img src=https://cdn.discordapp.com/attachments/1108467372551061665/1116054740938260670/pomodoro.png width=30px> ".." ┇ Cook Pasta Al Pomodoro",
 				txt = "Ingredients: <br> - Regular Pasta <br> - Olive Oil <br> - Tomatoes <br> - Tomato sauce <br> - Basil",
 				params = {
-					event = "CL-Pizzeria:Make",
+					event = "Gustav-Pizzeria:Make",
 					args = {
 						eventname = "PastaPomodoro",
 						number = 1,
@@ -2072,9 +2034,7 @@ RegisterNetEvent("CL-Pizzeria:PastasMenu", function()
     end)
 end)
 
-----------------
-----Functions
-----------------
+
 function DrawText3D(x, y, z, text)
     SetTextScale(0.35, 0.35)
     SetTextFont(4)
@@ -2104,12 +2064,6 @@ function LoadModel(model)
 	end
 end
 
-function ShowHelpNotification(text)
-    SetTextComponentFormat("STRING")
-    AddTextComponentString(text)
-    DisplayHelpTextFromStringLabel(0, 0, 1, 50)
-end
-
 function SpawnClipBoard()
 	for k, v in pairs(Config.DutyObjects) do
 		LoadModel(v.model)
@@ -2119,3 +2073,26 @@ function SpawnClipBoard()
 		ClipBoardSpawned = true
 	end
 end
+
+function ShowHelpNotification(text)
+    SetTextComponentFormat("STRING")
+    AddTextComponentString(text)
+    DisplayHelpTextFromStringLabel(0, 0, 1, 50)
+end
+
+
+Citizen.CreateThread(function()
+	for k, v in pairs(Config.Sted['General']['Blips']) do
+		if Config.BrugBlips then
+			Blip = AddBlipForCoord(v.Coords.x, v.Coords.y, v.Coords.z)
+			SetBlipSprite(Blip, v.BlipId)
+			SetBlipDisplay(Blip, 4)
+			SetBlipScale(Blip, 0.6)	
+			SetBlipColour(Blip, v.BlipColour)
+			SetBlipAsShortRange(Blip, true)
+			BeginTextCommandSetBlipName("STRING")
+			AddTextComponentString(v.Title)
+			EndTextCommandSetBlipName(Blip)
+		end
+	end	
+end)

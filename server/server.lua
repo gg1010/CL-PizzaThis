@@ -2,157 +2,157 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 QBCore.Functions.CreateUseableItem("pmenu", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:OpenMenu", src)
+    TriggerClientEvent("Gustav-Pizzeria:OpenMenu", src)
 end)
 
 QBCore.Functions.CreateUseableItem("pbeermugfull", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pbeermugfull", false, "Beer", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["Beer"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pbeermugfull", false, "Beer", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["Beer"])
 end)
 
 QBCore.Functions.CreateUseableItem("predwine", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "predwine", false, "Red Wine", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'p_wine_glass_s', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Thirst["RedWine"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "predwine", false, "Red Wine", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'p_wine_glass_s', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Toerst["RedWine"])
 end)
 
 QBCore.Functions.CreateUseableItem("pwhitewine", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pwhitewine", false, "White Wine", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_drink_whtwine', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Thirst["WhiteWine"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pwhitewine", false, "White Wine", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_drink_whtwine', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Toerst["WhiteWine"])
 end)
 
 QBCore.Functions.CreateUseableItem("ppinkwine", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "ppinkwine", false, "Pink Wine", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_drink_redwine', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Thirst["PinkWine"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "ppinkwine", false, "Pink Wine", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_drink_redwine', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Toerst["PinkWine"])
 end)
 
 QBCore.Functions.CreateUseableItem("pdusche", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pdusche", false, "Dusche Beer", "mp_player_intdrink", "loop_bottle", 'prop_beerdusche', 60309, { x=0.01, y=-0.01, z=-0.13 }, Config.Thirst["Beer"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pdusche", false, "Dusche Beer", "mp_player_intdrink", "loop_bottle", 'prop_beerdusche', 60309, { x=0.01, y=-0.01, z=-0.13 }, Config.Toerst["Beer"])
 end)
 
 QBCore.Functions.CreateUseableItem("plogger", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "plogger", false, "Logger Beer", "mp_player_intdrink", "loop_bottle", 'prop_beer_logger', 60309, { x=0.01, y=-0.01, z=-0.12 }, Config.Thirst["Beer"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "plogger", false, "Logger Beer", "mp_player_intdrink", "loop_bottle", 'prop_beer_logger', 60309, { x=0.01, y=-0.01, z=-0.12 }, Config.Toerst["Beer"])
 end)
 
 QBCore.Functions.CreateUseableItem("pam", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pam", false, "AM Beer", "mp_player_intdrink", "loop_bottle", 'prop_beer_amopen', 60309, { x=0.01, y=-0.01, z=-0.12 }, Config.Thirst["Beer"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pam", false, "AM Beer", "mp_player_intdrink", "loop_bottle", 'prop_beer_amopen', 60309, { x=0.01, y=-0.01, z=-0.12 }, Config.Toerst["Beer"])
 end)
 
 QBCore.Functions.CreateUseableItem("pwhiskey", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pwhiskey", false, "Whiskey", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_drink_whisky', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Thirst["Whiskey"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pwhiskey", false, "Whiskey", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_drink_whisky', 28422, { x=0.01, y=-0.01, z=-0.07 }, Config.Toerst["Whiskey"])
 end)
 
 QBCore.Functions.CreateUseableItem("pgoldsake", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pgoldsake", false, "Gold Sake", "mp_player_intdrink", "loop_bottle", 'prop_wine_white', 60309, { x=0.01, y=-0.01, z=-0.24 }, Config.Thirst["GoldSake"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pgoldsake", false, "Gold Sake", "mp_player_intdrink", "loop_bottle", 'prop_wine_white', 60309, { x=0.01, y=-0.01, z=-0.24 }, Config.Toerst["GoldSake"])
 end)
 
 QBCore.Functions.CreateUseableItem("prum", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "prum", false, "Rum", "mp_player_intdrink", "loop_bottle", 'prop_rum_bottle', 60309, { x=0.01, y=-0.01, z=-0.17 }, Config.Thirst["Rum"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "prum", false, "Rum", "mp_player_intdrink", "loop_bottle", 'prop_rum_bottle', 60309, { x=0.01, y=-0.01, z=-0.17 }, Config.Toerst["Rum"])
 end)
 
 QBCore.Functions.CreateUseableItem("pwhitewinebottle", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pwhitewinebottle", false, "White Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_02', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Thirst["WhiteWineBottle"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pwhitewinebottle", false, "White Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_02', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Toerst["WhiteWineBottle"])
 end)
 
 QBCore.Functions.CreateUseableItem("pwhiskeybottle", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pwhiskeybottle", false, "Whiskey Bottle", "mp_player_intdrink", "loop_bottle", 'prop_whiskey_bottle', 60309, { x=0.01, y=-0.01, z=-0.16 }, Config.Thirst["WhiskeyBottle"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pwhiskeybottle", false, "Whiskey Bottle", "mp_player_intdrink", "loop_bottle", 'prop_whiskey_bottle', 60309, { x=0.01, y=-0.01, z=-0.16 }, Config.Toerst["WhiskeyBottle"])
 end)
 
 QBCore.Functions.CreateUseableItem("pchampagne", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pchampagne", true, "Champagne")
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pchampagne", true, "Champagne")
 end)
 
 QBCore.Functions.CreateUseableItem("porange", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "porange", 'Orange', 4000, Config.Hunger["Orange"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'ng_proc_food_ornge1a', 60309, { x=0.03, y=-0.02, z=-0.03 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "porange", 'Orange', 4000, Config.Mad["Orange"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'ng_proc_food_ornge1a', 60309, { x=0.03, y=-0.02, z=-0.03 })
 end)
 
 QBCore.Functions.CreateUseableItem("papple", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, true, "papple", 'Apple', 4000, Config.Hunger["Apple"], "mp_player_inteat@burger", "mp_player_int_eat_burger")
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, true, "papple", 'Apple', 4000, Config.Mad["Apple"], "mp_player_inteat@burger", "mp_player_int_eat_burger")
 end)
 
 QBCore.Functions.CreateUseableItem("pbanana", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pbanana", 'Banana', 4000, Config.Hunger["Banana"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'ng_proc_food_nana1a', 60309, { x=0.05, y=-0.04, z=-0.03 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pbanana", 'Banana', 4000, Config.Mad["Banana"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'ng_proc_food_nana1a', 60309, { x=0.05, y=-0.04, z=-0.03 })
 end)
 
 QBCore.Functions.CreateUseableItem("pwatercup", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pwatercup", false, "Water Cup", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_plastic_cup_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["WaterCup"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pwatercup", false, "Water Cup", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_plastic_cup_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["WaterCup"])
 end)
 
 QBCore.Functions.CreateUseableItem("predwinebottle", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "predwinebottle", false, "Regular Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_red', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Thirst["RedWineBottle"], true)
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "predwinebottle", false, "Regular Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_red', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Toerst["RedWineBottle"], true)
 end)
 
 QBCore.Functions.CreateUseableItem("psparklingwine", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "psparklingwine", false, "Sparkling Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_02', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Thirst["SparklingBottle"], true)
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "psparklingwine", false, "Sparkling Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_02', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Toerst["SparklingBottle"], true)
 end)
 
 QBCore.Functions.CreateUseableItem("pcastellobrolio", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pcastellobrolio", false, "Castello Brolio Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_01', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Thirst["CastelloBrolioBottle"], true)
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pcastellobrolio", false, "Castello Brolio Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_01', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Toerst["CastelloBrolioBottle"], true)
 end)
 
 QBCore.Functions.CreateUseableItem("pgaryfarrel", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pgaryfarrel", false, "Gary Reffel Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_01', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Thirst["GaryReffelBottle"], true)
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pgaryfarrel", false, "Gary Reffel Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_01', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Toerst["GaryReffelBottle"], true)
 end)
 
 QBCore.Functions.CreateUseableItem("prutherfordhill", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "prutherfordhill", false, "Rutherford Hill Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_01', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Thirst["RutherfordHillBottle"], true)
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "prutherfordhill", false, "Rutherford Hill Red Wine", "mp_player_intdrink", "loop_bottle", 'prop_wine_bot_01', 60309, { x=0.01, y=-0.01, z=-0.27 }, Config.Toerst["RutherfordHillBottle"], true)
 end)
 
 QBCore.Functions.CreateUseableItem("ppinkwinebottle", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "ppinkwinebottle", false, "Pink Wine Bottle", "mp_player_intdrink", "loop_bottle", 'prop_wine_rose', 60309, { x=0.01, y=-0.01, z=-0.26 }, Config.Thirst["PinkWineBottle"], true)
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "ppinkwinebottle", false, "Pink Wine Bottle", "mp_player_intdrink", "loop_bottle", 'prop_wine_rose', 60309, { x=0.01, y=-0.01, z=-0.26 }, Config.Toerst["PinkWineBottle"], true)
 end)
 
 QBCore.Functions.CreateUseableItem("pespressomacchiato", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pespressomacchiato", false, "Espresso Macchiato", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["EspressoMacchiato"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pespressomacchiato", false, "Espresso Macchiato", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["EspressoMacchiato"])
 end)
 
 QBCore.Functions.CreateUseableItem("pcaramelfrappucino", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pcaramelfrappucino", false, "Caramel Frappucino", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["CaramelFrappucino"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pcaramelfrappucino", false, "Caramel Frappucino", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["CaramelFrappucino"])
 end)
 
 QBCore.Functions.CreateUseableItem("pcoldbrewlatte", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pcoldbrewlatte", false, "Coldbrew Latte", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["ColdbrewLatte"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pcoldbrewlatte", false, "Coldbrew Latte", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["ColdbrewLatte"])
 end)
 
 QBCore.Functions.CreateUseableItem("pstrawberryvanillaoatlatte", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pstrawberryvanillaoatlatte", false, "Strawberry Vanilla Oat Latte", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["StrawberryVanillaOatLatte"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pstrawberryvanillaoatlatte", false, "Strawberry Vanilla Oat Latte", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_mug_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["StrawberryVanillaOatLatte"])
 end)
 
 QBCore.Functions.CreateUseableItem("pcocacola", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "pcocacola", false, "CocaCola", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_cs_bs_cup', 28422, { x=0.01, y=-0.01, z=-0.05 }, Config.Thirst["CocaCola"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "pcocacola", false, "CocaCola", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_cs_bs_cup', 28422, { x=0.01, y=-0.01, z=-0.05 }, Config.Toerst["CocaCola"])
 end)
 
 QBCore.Functions.CreateUseableItem("psprite", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "psprite", false, "Sprite", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'ng_proc_sodacan_01b', 28422, { x=0.01, y=-0.01, z=-0.10 }, Config.Thirst["Sprite"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "psprite", false, "Sprite", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'ng_proc_sodacan_01b', 28422, { x=0.01, y=-0.01, z=-0.10 }, Config.Toerst["Sprite"])
 end)
 
 QBCore.Functions.CreateUseableItem("ppepper", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Drink", src, "ppepper", false, "DR.Pepper", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_plastic_cup_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Thirst["DRPepper"])
+    TriggerClientEvent("Gustav-Pizzeria:Drink", src, "ppepper", false, "DR.Pepper", "amb@world_human_drinking@coffee@male@idle_a", "idle_b", 'prop_plastic_cup_02', 28422, { x=0.01, y=-0.01, z=0.00 }, Config.Toerst["DRPepper"])
 end)
 
 QBCore.Functions.CreateUseableItem("pmargharita", function(source, item)
@@ -192,65 +192,65 @@ end)
 
 QBCore.Functions.CreateUseableItem("pmacncheese", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pmacncheese", 'Mac N Cheese', 5000, Config.Hunger["MacNCheese"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pmacncheese", 'Mac N Cheese', 5000, Config.Mad["MacNCheese"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pbbqporkmac", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pbbqporkmac", 'BBQ Pork Mac', 5000, Config.Hunger["BBQPorkMac"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pbbqporkmac", 'BBQ Pork Mac', 5000, Config.Mad["BBQPorkMac"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pfresca", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pfresca", 'Pasta Fresca', 5000, Config.Hunger["PastaFresca"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pfresca", 'Pasta Fresca', 5000, Config.Mad["PastaFresca"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("carbonara", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "carbonara", 'Pasta Carbonara', 5000, Config.Hunger["carbonara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "carbonara", 'Pasta Carbonara', 5000, Config.Mad["carbonara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("marinara", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "marinara", 'Pasta Marinara', 5000, Config.Hunger["marinara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "marinara", 'Pasta Marinara', 5000, Config.Mad["marinara"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pomodoro", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pomodoro", 'Pasta Al Pomodoro', 5000, Config.Hunger["pomodoro"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pomodoro", 'Pasta Al Pomodoro', 5000, Config.Mad["pomodoro"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'prop_cs_bowl_01b', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("bjoenholdt", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Ananas Pizza', 5000, Config.Hunger["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "bjoenholdt", 'Bjøtnholdt Ananas Pizza', 5000, Config.Mad["bjoenholdt"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pmargharitaslice", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pmargharitaslice", 'Pizza Margharita', 5000, Config.Hunger["PizzaMargharita"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pmargharitaslice", 'Pizza Margharita', 5000, Config.Mad["PizzaMargharita"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pnapollitanoslice", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pnapollitanoslice", 'Pizza Napollitano', 5000, Config.Hunger["PizzaNapollitano"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pnapollitanoslice", 'Pizza Napollitano', 5000, Config.Mad["PizzaNapollitano"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pmushroomspizzaslice", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pmushroomspizzaslice", 'Pizza Fungi', 5000, Config.Hunger["PizzaFungi"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pmushroomspizzaslice", 'Pizza Fungi', 5000, Config.Mad["PizzaFungi"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pseafoodslice", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pseafoodslice", 'Pizza Seafood', 5000, Config.Hunger["PizzaSeafood"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pseafoodslice", 'Pizza Seafood', 5000, Config.Mad["PizzaSeafood"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
 QBCore.Functions.CreateUseableItem("pvegpizzaslice", function(source, item)
     local src = source
-    TriggerClientEvent("CL-Pizzeria:Eat", src, false, "pvegpizzaslice", 'Vegetarian Pizza', 5000, Config.Hunger["VegetarianPizza"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
+    TriggerClientEvent("Gustav-Pizzeria:Eat", src, false, "pvegpizzaslice", 'Vegetarian Pizza', 5000, Config.Mad["VegetarianPizza"], "mp_player_inteat@burger", "mp_player_int_eat_burger", 'v_res_tt_pizzaplate', 60309, { x=0.01, y=-0.01, z=-0.0 })
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckDuty', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckDuty', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Player.PlayerData.job.onduty then
@@ -260,13 +260,13 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckDuty', function(source, cb)
 	end
 end)
 
-RegisterServerEvent("CL-Pizzeria:AddItem", function(item, amount)
+RegisterServerEvent("Gustav-Pizzeria:AddItem", function(item, amount)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local totalWeight = QBCore.Player.GetTotalWeight(Player.PlayerData.items)
+    local tWeight = QBCore.Player.GetTotalWeight(Player.PlayerData.items)
     local itemInfo = QBCore.Shared.Items[item:lower()]
     if itemInfo then
-        if (totalWeight + (itemInfo['weight'] * amount)) <= Config.MaxInventoryWeight then
+        if (tWeight + (itemInfo['weight'] * amount)) <= Config.MaxInventoryVegt then
             Player.Functions.AddItem(item, amount, false)
         else
             TriggerClientEvent('QBCore:Notify', src, Config.Locals['Notifications']['InventoryFull'], "error")
@@ -276,21 +276,21 @@ RegisterServerEvent("CL-Pizzeria:AddItem", function(item, amount)
     end
 end)
 
-RegisterNetEvent('CL-Pizzeria:AddThirst', function(amount)
+RegisterNetEvent('Gustav-Pizzeria:AddThirst', function(amount)
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
     Player.Functions.SetMetaData('thirst', amount)
     TriggerClientEvent('hud:client:UpdateNeeds', source, Player.PlayerData.metadata.hunger, amount)
 end)
 
-RegisterNetEvent('CL-Pizzeria:AddHunger', function(amount)
+RegisterNetEvent('Gustav-Pizzeria:AddHunger', function(amount)
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
     Player.Functions.SetMetaData('hunger', amount)
     TriggerClientEvent('hud:client:UpdateNeeds', source, amount, Player.PlayerData.metadata.thirst)
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:HasItem', function(source, cb, item, amount)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:HasItem', function(source, cb, item, amount)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local GetItem = Player.Functions.GetItemByName(item)
@@ -313,7 +313,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:HasItem', function(source, cb, item
     end
 end)
 
-RegisterServerEvent("CL-Pizzeria:RemoveItem", function(item, amount)
+RegisterServerEvent("Gustav-Pizzeria:RemoveItem", function(item, amount)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local GetItem = Player.Functions.GetItemByName(item)
@@ -327,11 +327,11 @@ RegisterServerEvent("CL-Pizzeria:RemoveItem", function(item, amount)
     end
 end)
 
-RegisterServerEvent('CL-Pizzeria:TakeMoney', function(data)
+RegisterServerEvent('Gustav-Pizzeria:TakeMoney', function(data)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
     if Player.PlayerData.money.cash >= data.price then
-        TriggerClientEvent("CL-Pizzeria:SpawnVehicle", src, data.vehicle)  
+        TriggerClientEvent("Gustav-Pizzeria:SpawnVehicle", src, data.vehicle)  
         Player.Functions.RemoveMoney("cash", data.price)
         TriggerClientEvent('QBCore:Notify', src, Config.Locals["Notifications"]["VehicleBought"], "success")    
     else
@@ -339,7 +339,7 @@ RegisterServerEvent('CL-Pizzeria:TakeMoney', function(data)
     end    
 end)
 
-RegisterServerEvent('CL-Pizzeria:BuyGlass', function(data)
+RegisterServerEvent('Gustav-Pizzeria:BuyGlass', function(data)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Player.PlayerData.money.cash >= data.price then
@@ -352,7 +352,7 @@ RegisterServerEvent('CL-Pizzeria:BuyGlass', function(data)
     end  
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPizzaDoughItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForPizzaDoughItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local flour = Player.Functions.GetItemByName("ppizzaflour")
@@ -366,7 +366,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPizzaDoughItems', function(
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForStrawberryVanillaOatLatteItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForStrawberryVanillaOatLatteItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local glass = Player.Functions.GetItemByName("pcoffeeglass")
@@ -379,7 +379,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForStrawberryVanillaOatLatteIt
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForColdBrewLatteItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForColdBrewLatteItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local glass = Player.Functions.GetItemByName("phighcoffeeglasscup")
@@ -392,7 +392,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForColdBrewLatteItems', functi
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForCaramelFrappucinoItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForCaramelFrappucinoItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local glass = Player.Functions.GetItemByName("phighcoffeeglasscup")
@@ -407,7 +407,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForCaramelFrappucinoItems', fu
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForEspressoMacchiatoItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForEspressoMacchiatoItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local glass = Player.Functions.GetItemByName("pespressocoffeecup")
@@ -420,7 +420,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForEspressoMacchiatoItems', fu
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPizzaBaseItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForPizzaBaseItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local flour = Player.Functions.GetItemByName("ppizzaflour")
@@ -433,7 +433,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPizzaBaseItems', function(s
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForMargharitaPizzaItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForMargharitaPizzaItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local basil = Player.Functions.GetItemByName("pbasil")
@@ -448,7 +448,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForMargharitaPizzaItems', func
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForNapollitanoPizzaItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForNapollitanoPizzaItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local basil = Player.Functions.GetItemByName("pbasil")
@@ -462,7 +462,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForNapollitanoPizzaItems', fun
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForMushroomsPizzaItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForMushroomsPizzaItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local butter = Player.Functions.GetItemByName("pbutter")
@@ -476,7 +476,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForMushroomsPizzaItems', funct
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForSeafoodPizzaItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForSeafoodPizzaItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local seafoodmix = Player.Functions.GetItemByName("pseafoodmix")
@@ -491,7 +491,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForSeafoodPizzaItems', functio
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForVegetarianPizzaItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForVegetarianPizzaItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local tomatoes = Player.Functions.GetItemByName("ptomatoes")
@@ -506,7 +506,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForVegetarianPizzaItems', func
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForMacNCheeseItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForMacNCheeseItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local macaroni = Player.Functions.GetItemByName("pelbowmacaroni")
@@ -521,7 +521,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForMacNCheeseItems', function(
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBBQPorkMacItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForBBQPorkMacItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local meat = Player.Functions.GetItemByName("pporkmeat")
@@ -536,7 +536,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBBQPorkMacItems', function(
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaFrescaItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForPastaFrescaItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local pasta = Player.Functions.GetItemByName("pregularpasta")
@@ -550,7 +550,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaFrescaItems', function
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaCarbonaraItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForPastaCarbonaraItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local pasta = Player.Functions.GetItemByName("pregularpasta")
@@ -565,7 +565,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaCarbonaraItems', funct
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaMarinaraItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForPastaMarinaraItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local pasta = Player.Functions.GetItemByName("pregularpasta")
@@ -578,7 +578,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaMarinaraItems', functi
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaPomodoroItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForPastaPomodoroItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local pasta = Player.Functions.GetItemByName("pregularpasta")
@@ -593,7 +593,7 @@ QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForPastaPomodoroItems', functi
 	end
 end)
 
-QBCore.Functions.CreateCallback('CL-Pizzeria:CheckForBjoenholdtItems', function(source, cb)
+QBCore.Functions.CreateCallback('Gustav-Pizzeria:CheckForBjoenholdtItems', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local tomatoes = Player.Functions.GetItemByName("ptomatoes")

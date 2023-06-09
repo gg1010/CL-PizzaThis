@@ -2,8 +2,8 @@ fx_version 'adamant'
 
 game 'gta5'
 lua54 'yes'
-author "NevoSwissa#0111"
-description "Pizzeria Job Made By NevoSwissa#0111 For CloudDevelopment"
+-- author "NevoSwissa#0111"
+-- description ""
 
 ui_page {'html/index.html'}
 
